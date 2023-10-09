@@ -4,3 +4,12 @@ app = create_app()
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+
+# TODO:
+# weights as ints
+# formatting
+# change home-> weight log
