@@ -7,9 +7,7 @@ if __name__ == '__main__':
 
 
 
-
-
 # TODO:
 # weights as ints
-# formatting
+# formatting, display date/time w/ weight
 # change home-> weight log
