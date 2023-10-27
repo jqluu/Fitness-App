@@ -1,0 +1,23 @@
+{% extends "base.html" %} 
+{% block title %}Weight Tracker{% endblock %} 
+{% block content %}
+
+    <h1 align="center">Weight Tracker</h1>
+    <ul class="list-group list-group-flush" id="weights">
+      {% for weight in user.weights %}
+      <li class="list-group-item">
+        {{ weight.data }}, {{ weight.date }}
+        <button type="button" class="close" onClick="deleteWeight({{ weight.id }})">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </li>
+      {% endfor %}
+    </ul>
+    <form method="POST">
+      <textarea name="weight" id="weight" class="form-control"></textarea>
+      <br />
+      <div align="center">
+        <button type="submit" class="btn btn-primary">Add weight</button>
+      </div>
+    </form>
+{% endblock %}

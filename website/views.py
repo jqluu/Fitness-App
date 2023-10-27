@@ -6,9 +6,20 @@ import json
 
 views = Blueprint('views', __name__)
 
+# home / dash
+
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+    
+    return render_template("home.html", user=current_user)
+
+
+# weightlog
+
+@views.route('/weighttracker', methods=['GET', 'POST'])
+@login_required
+def weighttracker():
     if request.method == 'POST':
         weight = request.form.get('weight')
 
@@ -21,7 +32,7 @@ def home():
 
         flash('Weight added.', category='success')
 
-    return render_template("home.html", user=current_user)
+    return render_template("weight_tracker.html", user=current_user)
 
 
 @views.route('/delete-weight', methods=['POST'])
@@ -35,3 +46,21 @@ def delete_weight():
             db.session.commit()
 
     return jsonify({})
+
+
+# workout tracker
+
+@views.route('/workoutlog', methods=['GET', 'POST'])
+@login_required
+def workoutlog():
+    
+    return render_template("workout_log.html", user=current_user)
+
+
+# analytics
+
+@views.route('/analytics', methods=['GET', 'POST'])
+@login_required
+def analytics():
+    
+    return render_template("analytics.html", user=current_user)

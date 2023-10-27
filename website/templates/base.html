@@ -31,6 +31,9 @@
         <div class="navbar-nav">
           {% if user.is_authenticated %}
           <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <a class="nav-item nav-link" id="weighttracker" href="/weighttracker">Weight Tracker</a>
+          <a class="nav-item nav-link" id="workoutlog" href="/workoutlog">Workout Log</a>
+          <a class="nav-item nav-link" id="analytics" href="/analytics">Analytics</a>
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">Login</a>
