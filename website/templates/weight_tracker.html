@@ -2,10 +2,16 @@
 {% block title %}Weight Tracker{% endblock %} 
 {% block content %}
 <br>
-    <h1 align="center">Weight Tracker</h1>
-    <ul class="list-group list-group-flush" id="weights">
+<head>
+  <link rel="stylesheet" type="text/css" href="static/styles.css">
+  <h1>Weight Tracker</h1>
+</head>
+<body>
+  <br>
+  <div class="centered-content">
+    <ul class="list-group list-group-flush center-list" id="weights">
       {% for weight in user.weights %}
-      <li class="list-group-item">
+      <li class="list-group-item weight-item">
         {{ weight.data }}, {{ weight.date }}
         <button type="button" class="close" onClick="deleteWeight({{ weight.id }})">
           <span aria-hidden="true">&times;</span>
@@ -13,11 +19,12 @@
       </li>
       {% endfor %}
     </ul>
+
     <form method="POST">
-      <input type="text" name="weight" id="weight" class="form-control" required pattern="[0-9]+">
+      <input type="text" name="weight" id="weight" class="form-control weight-item" required pattern="[0-9]+">
       <br />
-      <div align="center">
-        <button type="submit" class="btn btn-primary">Add weight</button>
-      </div>
+      <button type="submit" class="btn btn-primary">Add weight</button>
     </form>
+  </div>
+</body>
 {% endblock %}

@@ -2,6 +2,20 @@
 {% block title %}Home{% endblock %} 
 {% block content %}
 <br>
-    <h1 align="center">Home</h1>
-    
+<head>
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+    <h1>Dashboard</h1>
+</head>
+
+<br>
+
+<div class="home-container">
+    <div class="weight-graph-home">
+    <h2>Weight</h2>
+    <img src="{{ graph_data }}" alt="Graph">
+    </div>
+
+</div>
+
+
 {% endblock %}

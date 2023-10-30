@@ -1,0 +1,34 @@
+.centered-content {
+    text-align: center;
+    /* Optionally, you can add margin and padding for better alignment */
+    margin: 0 auto;
+    padding: 15px; /* Adjust the value as needed */
+    max-width: 400px;
+    border: 2px solid #000000;
+  }
+
+  h1 {
+    text-align: center;
+    
+  }
+
+  .weight-graph-home {
+    
+    width: calc(33.33% - 10px); /* Adjust the width and any spacing as needed */
+    margin: 5px; /* Add spacing between the divs */
+    background-color: #f0f0f0; /* Background color for the divs */
+    padding: 15px;
+    box-sizing: border-box; /* Include padding in width calculation */
+      
+  }
+
+  .home-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .weight-graph-home img {
+    max-width: 100%; /* Ensure the image doesn't exceed the container's width */
+    max-height: 100%; /* Ensure the image doesn't exceed the container's height */
+  }
