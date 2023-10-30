@@ -1,23 +1,57 @@
 {% extends "base.html" %} 
 {% block title %}Workout Log{% endblock %} 
 {% block content %}
-
+<br>
     <h1 align="center">Workout Log</h1>
-    <!-- <ul class="list-group list-group-flush" id="weights">
-      {% for weight in user.weights %}
-      <li class="list-group-item">
-        {{ weight.data }}
-        <button type="button" class="close" onClick="deleteWeight({{ weight.id }})">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-      {% endfor %}
-    </ul>
+    <br>
     <form method="POST">
-      <textarea name="weight" id="weight" class="form-control"></textarea>
-      <br />
-      <div align="center">
-        <button type="submit" class="btn btn-primary">Add weight</button>
+
+      <label for="event_date">Date:</label>
+      <input type="date" id="date" name="date">
+      <br>
+      
+      <label for="workout">Select Workout Type:</label>
+      <select id="workout-type" name="workout-type" onchange="showFieldsBasedOnSelection()">
+        <option value="upperbody">Upper Body Workout</option>
+        <option value="lowerbody">Lower Body Workout</option>
+        <option value="cardio">Cardio Workout</option>
+        <option value="custom">Custom Workout</option>
+      </select>
+
+    <div id="exercise-fields">
+      <div id="upper-exercises">
+        <select id="upperselection" name="upperselection">
+          <option value="exercise">Chest</option>
+          <option value="exercise">Back</option>
+        </select>
       </div>
-    </form> -->
+      <div id="lower-exercises">
+        <select id="exercise-type" name="exercise-type">
+          <option value="exercise">Squat</option>
+          <option value="exercise">Deadlift</option>
+        </select>
+      </div>
+      <div id="cardio-exercise">
+        <label for="exercise">Cardio:</label>
+        <input type="text" id="exercise" name="exercise" placeholder="Enter cardio exercise">
+        <label for="exercise">Duration:</label>
+        <input type="text" id="exercise" name="exercise" placeholder="Enter duration">
+      </div>
+      <div id="custom">
+        <label for="exercise">Custom Exercise:</label>
+        <input type="text" id="exercise" name="exercise" placeholder="Enter custom exercise">
+      </div>
+    </div>
+
+
+
+      <br>
+      <input type="submit" value="Submit">
+    </form>
 {% endblock %}
+
+
+
+
+
+<!-- create a workout, dynamically add exercises to it -->

@@ -3,6 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 
+#firebase
+# import firebase_admin
+# from firebase_admin import credentials
+# from firebase_admin import firestore
+
 # db 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -25,6 +30,7 @@ def create_app():
     # create db 
     with app.app_context():
         db.create_all()
+   
 
     # login manager
     login_manager =  LoginManager()

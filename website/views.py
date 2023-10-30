@@ -22,10 +22,6 @@ def home():
 def weighttracker():
     if request.method == 'POST':
         weight = request.form.get('weight')
-
-        # if not weight.isdigit():
-        #     flash('Please enter a valid weight.', category='error')
-        # else:
         new_weight = Weight(data=weight, user_id=current_user.id)
         db.session.add(new_weight)
         db.session.commit()

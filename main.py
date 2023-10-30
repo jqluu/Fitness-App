@@ -11,7 +11,14 @@ if __name__ == '__main__':
 
 
 # TODO:
-# weights as ints
 # formatting, display date/time w/ weight
-# change home-> weight log
+# weight graph in analytics
+# curr/past date for weight
+
+#db models
+#new workout form
+
+
+
+
 # admin@admin.com / admin

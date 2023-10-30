@@ -1,7 +1,7 @@
 {% extends "base.html" %} 
 {% block title %}Weight Tracker{% endblock %} 
 {% block content %}
-
+<br>
     <h1 align="center">Weight Tracker</h1>
     <ul class="list-group list-group-flush" id="weights">
       {% for weight in user.weights %}
@@ -14,7 +14,7 @@
       {% endfor %}
     </ul>
     <form method="POST">
-      <textarea name="weight" id="weight" class="form-control"></textarea>
+      <input type="text" name="weight" id="weight" class="form-control" required pattern="[0-9]+">
       <br />
       <div align="center">
         <button type="submit" class="btn btn-primary">Add weight</button>
