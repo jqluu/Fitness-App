@@ -2,7 +2,11 @@
 {% block title %}Workout Log{% endblock %} 
 {% block content %}
 <br>
-    <h1 align="center">Workout Log</h1>
+<head>
+  <link rel="stylesheet" type="text/css" href="static/styles.css">
+  <h1>Workout Log</h1>
+</head>
+<body>
     <br>
     <form method="POST">
 
@@ -43,11 +47,10 @@
       </div>
     </div>
 
-
-
-      <br>
-      <input type="submit" value="Submit">
+    <br>
+    <input type="submit" value="Submit">
     </form>
+</body>
 {% endblock %}
 
 

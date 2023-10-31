@@ -1,10 +1,11 @@
-.centered-content {
+.weight-tracker {
     text-align: center;
     /* Optionally, you can add margin and padding for better alignment */
     margin: 0 auto;
     padding: 15px; /* Adjust the value as needed */
     max-width: 300px;
     border: 2px solid #000000;
+    background-color: rgb(255, 255, 255);
   }
 
   h1 {
@@ -54,3 +55,17 @@
     justify-content: space-between;
     text-align: center;
   }
+
+  .content-container{
+    background-color: rgb(139, 140, 140);
+    background-size: cover;
+  }
+
+  body {
+    background-color: rgb(139, 140, 140);
+    background-size: cover;
+}
+
+.navbar .navbar-nav .nav-item.nav-link {
+  color: #00bfff; /* Set the text color to red (#FF0000) */
+}
