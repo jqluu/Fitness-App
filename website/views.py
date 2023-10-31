@@ -15,6 +15,7 @@ import pandas as pd
 # db
 import sqlite3
 from datetime import datetime  
+from datetime import date
 
 def generate_weight_plot():
 
@@ -60,15 +61,14 @@ def home():
 def weighttracker():
     if request.method == 'POST':
         weight = request.form.get('weight')
-        date = request.form.get('date')
+        selected_date = request.form.get('selected-date')
 
-        if (date):
-            date = datetime.strptime(date, "%Y-%m-%d")
-            new_weight = Weight(data=weight, date=date, user_id=current_user.id)
+        if (selected_date):
+            selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
         else:
-            new_weight = Weight(data=weight, user_id=current_user.id)
+            selected_date = date.today()
 
-
+        new_weight = Weight(data=weight, date=selected_date, user_id=current_user.id)
         db.session.add(new_weight)
         db.session.commit()
         flash('Weight added.', category='success')
@@ -101,7 +101,7 @@ def workoutlog():
 @views.route('/analytics', methods=['GET', 'POST'])
 @login_required
 def analytics():
-    # generate graph
+    # generate graphs
     graph_data = generate_weight_plot()
     #debug
     #print("graph_data:", graph_data)

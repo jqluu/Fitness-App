@@ -12,7 +12,7 @@
     <ul class="list-group list-group-flush center-list" id="weights">
       {% for weight in user.weights %}
       <li class="list-group-item weight-item">
-        {{ weight.data }}, {{ weight.date }}
+        {{ weight.data }}, {{ weight.date.strftime("%Y-%m-%d") }}
         <button type="button" class="close" onClick="deleteWeight({{ weight.id }})">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -20,13 +20,14 @@
       {% endfor %}
     </ul>
 
+    <br>
     <form method="POST">
       <label for="weight">Enter Weight:</label>
       <input type="text" name="weight" id="weight" class="form-control weight-item" required pattern="[0-9]+">
       
-      <label for="date">Please select a date(optional):</label>
-      <input type="date" name="date" id="date" class="form-control date-item">
-      
+      <label for="selected-date">Select a past date(optional):</label>
+      <input type="date" name="selected-date" id="selected-date" class="form-control date-item">
+
       <br />
       <button type="submit" class="btn btn-primary">Add weight</button>
     </form>
