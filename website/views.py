@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify
+from flask import Blueprint, render_template, request, flash, jsonify, Response
 from flask_login import login_required, current_user
 from .models import Weight
 from . import db
@@ -10,28 +10,36 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import io
 import base64
+import pandas as pd
 
 # db
 import sqlite3
+from datetime import datetime  
 
-def generate_plot():
-    data = [(1, 2), (2, 3), (3, 5), (4, 7)]
-    x, y = zip(*data)
+def generate_weight_plot():
 
-    fig, ax = plt.subplots()  # Create a figure and axis
-    ax.plot(x, y)
-    ax.set_xlabel('X-axis Label')
-    ax.set_ylabel('Y-axis Label')
-    ax.set_title('Sample Graph')
+    # Create a Pandas DataFrame from the retrieved data
+    weights = Weight.query.all()
+    data = [(weight.date, float(weight.data)) for weight in weights]
+    df = pd.DataFrame(data, columns=['Date', 'Weight'])
+
+    # Create graph
+    plt.figure(figsize=(10, 6))
+    plt.plot(df['Date'], df['Weight'])
+    plt.xlabel('Date')
+    plt.ylabel('Weight')
+    plt.title('Weight Data Over Time')
+
 
     # Save the plot to an image
     img = io.BytesIO()
     plt.savefig(img, format='png')
     img.seek(0)
 
+    # Return url
     img_data_uri = f"data:image/png;base64, {base64.b64encode(img.read()).decode()}"
-
     return img_data_uri
+
 
 views = Blueprint('views', __name__)
 
@@ -39,13 +47,12 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-    graph_data = generate_plot()
 
-    print("graph_data:", graph_data)
+    graph_data = generate_weight_plot()
+    # print("graph_data:", graph_data)
 
     return render_template("home.html", user=current_user, graph_data=graph_data)
     
-
 
 # weight tracker
 @views.route('/weighttracker', methods=['GET', 'POST'])
@@ -53,10 +60,17 @@ def home():
 def weighttracker():
     if request.method == 'POST':
         weight = request.form.get('weight')
-        new_weight = Weight(data=weight, user_id=current_user.id)
+        date = request.form.get('date')
+
+        if (date):
+            date = datetime.strptime(date, "%Y-%m-%d")
+            new_weight = Weight(data=weight, date=date, user_id=current_user.id)
+        else:
+            new_weight = Weight(data=weight, user_id=current_user.id)
+
+
         db.session.add(new_weight)
         db.session.commit()
-
         flash('Weight added.', category='success')
 
     return render_template("weight_tracker.html", user=current_user)
@@ -88,20 +102,15 @@ def workoutlog():
 @login_required
 def analytics():
     # generate graph
-    graph_data = generate_plot()
-
-    print("graph_data:", graph_data)
-
+    graph_data = generate_weight_plot()
+    #debug
+    #print("graph_data:", graph_data)
     return render_template("analytics.html", user=current_user, graph_data=graph_data)
-
-
-# data = Weight.query.all()
-#     data_list = [(weight.date, weight.data) for weight in data]
 
 
 # profile
 @views.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-
-    return render_template("profile.html", user=current_user)
+    username = current_user.username
+    return render_template("profile.html", user=current_user, username=username)

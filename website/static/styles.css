@@ -9,7 +9,6 @@
 
   h1 {
     text-align: center;
-    
   }
 
   .weight-graph-home {
@@ -22,13 +21,36 @@
       
   }
 
+  .graph-analytics {
+    
+    width: calc(50% - 10px); /* Adjust the width and any spacing as needed */
+    margin: 5px; /* Add spacing between the divs */
+    background-color: #f0f0f0; /* Background color for the divs */
+    padding: 15px;
+    box-sizing: border-box; /* Include padding in width calculation */
+      
+  }
+
   .home-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    text-align: center;
   }
 
   .weight-graph-home img {
     max-width: 100%; /* Ensure the image doesn't exceed the container's width */
     max-height: 100%; /* Ensure the image doesn't exceed the container's height */
+  }
+
+  .graph-analytics img {
+    max-width: 100%; /* Ensure the image doesn't exceed the container's width */
+    max-height: 100%; /* Ensure the image doesn't exceed the container's height */
+  }
+
+  .analytics-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-align: center;
   }

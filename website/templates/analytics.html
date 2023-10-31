@@ -2,11 +2,28 @@
 {% block title %}Analytics{% endblock %} 
 {% block content %}
 <br>
-    <h1 align="center">Analytics</h1>
+<head>
+    <link rel="stylesheet" type="text/css" href="static/styles.css">
+    <h1>Analytics</h1>
+</head>
+
+<br>
+
+<div class="analytics-container">
+    <div class="graph-analytics">
+        <h2>Weight</h2>
+        <img src="{{ graph_data }}" alt="Graph">
+    </div>
+    <div class="graph-analytics">
+        <h2>Strength</h2>
+        <img src="{{ graph_data }}" alt="Graph">
+    </div>
     
-    <br>
-    <h1>Graph</h1>
-    <img src="{{ graph_data }}" alt="Graph">
+  
+
+    
+
+</div>
     
     
 {% endblock %}
