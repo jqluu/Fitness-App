@@ -5,51 +5,98 @@
 <head>
   <link rel="stylesheet" type="text/css" href="static/styles.css">
   <h1>Workout Log</h1>
+
+  <script src="index.js"></script>
 </head>
 <body>
-    <br>
-    <form method="POST">
 
-      <label for="event_date">Date:</label>
-      <input type="date" id="date" name="date">
-      <br>
-      
-      <label for="workout">Select Workout Type:</label>
-      <select id="workout-type" name="workout-type" onchange="showFieldsBasedOnSelection()">
-        <option value="upperbody">Upper Body Workout</option>
-        <option value="lowerbody">Lower Body Workout</option>
-        <option value="cardio">Cardio Workout</option>
-        <option value="custom">Custom Workout</option>
-      </select>
+  <div class="centered-content">
+    <button class="btn btn-custom" id="openModalButton"> New workout </button>
+  </div>
 
-    <div id="exercise-fields">
-      <div id="upper-exercises">
-        <select id="upperselection" name="upperselection">
-          <option value="exercise">Chest</option>
-          <option value="exercise">Back</option>
-        </select>
+  <div class="workout-log-page">
+  <!-- Display recent workouts -->
+    <h2>Recent workouts:</h2>
+
+    <div class="workout-wrapper">
+      {% for workout in user.workoutLog %}
+      <div class="workout-container">
+        <div class="workout-header">
+          {{ workout.date.strftime("%m/%d") }}, {{ workout.name }}
+        </div>
+        <div class="exercise-list">
+          {% for exercise in workout.exercises %}
+            <div class="exercise-item">
+              {{ exercise.name }}: {{ exercise.sets }} for {{ exercise.reps }}
+            </div>
+          {% endfor %}
+        </div>
       </div>
-      <div id="lower-exercises">
-        <select id="exercise-type" name="exercise-type">
-          <option value="exercise">Squat</option>
-          <option value="exercise">Deadlift</option>
-        </select>
-      </div>
-      <div id="cardio-exercise">
-        <label for="exercise">Cardio:</label>
-        <input type="text" id="exercise" name="exercise" placeholder="Enter cardio exercise">
-        <label for="exercise">Duration:</label>
-        <input type="text" id="exercise" name="exercise" placeholder="Enter duration">
-      </div>
-      <div id="custom">
-        <label for="exercise">Custom Exercise:</label>
-        <input type="text" id="exercise" name="exercise" placeholder="Enter custom exercise">
-      </div>
+      {% endfor %}
     </div>
+      
 
-    <br>
-    <input type="submit" value="Submit">
-    </form>
+
+  <br>
+  
+  <!-- Workout modal form -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModalButton">&times;</span>
+          
+      <div>
+        <form method="POST">
+          
+          <label for="selected-date">Date</label>
+          <input type="date" name="selected-date" id="selected-date" class="form-control date-item">
+
+          <br>
+          <label for="name">Workout title</label>
+          <input type="text" name="name" id="name" class="form-control name-item" pattern="[A-Za-z0-9]+">
+
+          <!-- exercise format -->
+          <br>
+          <div class="exercise-table">
+            <table id="exerciseTable">
+              <thead>
+                <tr>
+                  <th>Exercise</th>
+                  <th>Sets</th>
+                  <th>Reps</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+
+
+          <!-- list exercises submitted  -->
+          <br>
+          <div class="exercise-form">
+
+            <div id="exerciseRows">
+              <!-- Initially, there is no row -->
+            </div>
+
+            <div class="centered-content">
+              <button type="button" id="addButton">Add Exercise</button>
+            </div>
+
+          </div>
+
+
+          <br>
+          <br>
+          <div class="centered-content">
+            <button type="submit" class="btn btn-primary">Add workout</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+
+  </div>
 </body>
 {% endblock %}
 
@@ -57,4 +104,37 @@
 
 
 
-<!-- create a workout, dynamically add exercises to it -->
+<!-- create a workout, dynamically add exercises to it
+
+select date
+select workout type: upper, lower, cardio, custom
+list exercises depending workout type
+
+
+
+add exercise = new exercise{name, sets, reps}
+submit = new workout{date, title, type, exercises[]}
+
+
+
+each user has a list of workouts
+
+
+exercise list:
+1. when a user adds a new exercise, add this exercise to a global exercise list
+2. import an external list of exercises, and loop through it for the form field dropdown menu
+  -dropdown menu? search bar?
+
+3. create a workout w/ title, date
+  -entry is added 
+
+
+4. api?
+
+
+TODO:
+-work on the dynamic form/layout
+-implement exercise api
+-link to db
+-display added workouts
+-->

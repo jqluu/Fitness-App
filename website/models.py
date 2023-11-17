@@ -8,13 +8,13 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     username = db.Column(db.String(150))
     password = db.Column(db.String(150))
-    weights = db.relationship('Weight')
+    weightLog = db.relationship('Weight')
+    workoutLog = db.relationship('Workout')
 
 class Weight(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String(10))
     date = db.Column(Date)
-    # db.Column(db.DateTime(timezone=True), default=func.date())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
@@ -29,7 +29,8 @@ workout_exercise = db.Table(
 class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-    date = db.Column(Date, default=func.current_date())
+    date = db.Column(Date)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     # exercise many to many relation
     exercises = db.relationship(
@@ -42,13 +43,11 @@ class Workout(db.Model):
 
 class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(10))
+    name = db.Column(db.String(50))
+    sets = db.Column(db.Integer)
+    reps = db.Column(db.Integer)
 
-class Set(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    weight = db.Column(db.Integer)
-    rep = db.Column(db.Integer)
-    qty = db.Column(db.Integer)
+
 
   
 

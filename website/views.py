@@ -1,8 +1,10 @@
+# flask 
 from flask import Blueprint, render_template, request, flash, jsonify, Response
 from flask_login import login_required, current_user
-from .models import Weight
-from . import db
 import json
+
+# models
+from .models import Weight, Workout, Exercise, workout_exercise
 
 # plot
 import matplotlib
@@ -13,6 +15,7 @@ import base64
 import pandas as pd
 
 # db
+from . import db
 import sqlite3
 from datetime import datetime  
 from datetime import date
@@ -93,7 +96,35 @@ def delete_weight():
 @views.route('/workoutlog', methods=['GET', 'POST'])
 @login_required
 def workoutlog():
-    
+    if request.method == 'POST':
+        print(request.content_type)
+
+        workout_data = request.json  # Get the JSON data sent from the frontend
+        print(workout_data)
+
+        # Extract workout details (title, date, exercises)
+        title = workout_data.get('title')
+        selected_date = workout_data.get('date')
+        exercises = workout_data.get('exercises')
+        workout_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+
+        # Create a new Workout instance
+        new_workout = Workout(name=title, date=workout_date, user_id=current_user.id)
+
+        # Create Exercise instances and associate with the workout
+        for exercise_data in exercises:
+            exercise_name = exercise_data['name']
+            sets = exercise_data['sets']
+            reps = exercise_data['reps']
+
+            new_exercise = Exercise(name=exercise_name, sets=sets, reps=reps)
+            new_workout.exercises.append(new_exercise)
+
+        # Add the new workout to the database session and commit changes
+        db.session.add(new_workout)
+        db.session.commit()
+        flash('Workout added.', category='success')
+
     return render_template("workout_log.html", user=current_user)
 
 

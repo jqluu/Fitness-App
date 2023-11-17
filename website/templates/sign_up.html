@@ -2,8 +2,13 @@
 {% block title %}Sign up{% endblock %}
 
 {% block content %}
+<br>
+<head>
+  <link rel="stylesheet" type="text/css" href="static/styles.css">
+  <h1>Sign up</h1>
+</head>
+<body></body>
 <form method="POST">
-    <h3 align="center">Sign Up</h3>
     <div class="form-group">
         <label for="email">Email Address</label> 
         <input 
@@ -14,6 +19,8 @@
             placeholder="Enter email"
         />
     </div>
+
+    <br>
     <div class="form-group">
         <label for="username">Username</label> 
         <input 
@@ -24,6 +31,8 @@
             placeholder="Enter username"
         />
     </div>
+
+    <br>
     <div class="form-group">
         <label for="password">Password</label> 
         <input 
@@ -36,6 +45,10 @@
     </div>
     <br />
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="centered-content">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    
 </form>
+
 {% endblock %}

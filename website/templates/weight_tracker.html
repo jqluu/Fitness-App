@@ -10,7 +10,7 @@
   <br>
   <div class="weight-tracker">
     <ul class="list-group list-group-flush center-list" id="weights">
-      {% for weight in user.weights %}
+      {% for weight in user.weightLog %}
       <li class="list-group-item weight-item">
         {{ weight.data }}, {{ weight.date.strftime("%Y-%m-%d") }}
         <button type="button" class="close" onClick="deleteWeight({{ weight.id }})">
@@ -29,7 +29,7 @@
       <input type="date" name="selected-date" id="selected-date" class="form-control date-item">
 
       <br />
-      <button type="submit" class="btn btn-primary">Add weight</button>
+      <button type="submit" class="btn btn-custom">Add weight</button>
     </form>
   </div>
 </body>
