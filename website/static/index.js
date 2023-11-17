@@ -116,7 +116,10 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(event) {
       event.preventDefault();
       sendWorkoutDataToFlask();
-      window.location.href = '/workoutlog';
+      
+      setTimeout(function() {
+        window.location.href = '/workoutlog';
+      }, 100);
   });
 
 });

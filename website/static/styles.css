@@ -112,7 +112,7 @@
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: #e2eaef;
   margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
@@ -133,6 +133,7 @@
 .exercise-form {
   border: 1px solid #ccc; /* Border for visual separation */
   padding: 20px; /* Adjust padding for space around form */
+  background-color: rgb(241 241 241);
 }
 
 .exercise-form .form-group {
@@ -156,24 +157,6 @@
   background-color: #00bfff; 
   color: white;
 }
-
-.exercise-table {
-  margin-top: 20px;
-}
-
-#exerciseTable {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-/* Style for table header */
-#exerciseTable th {
-  background-color: #f2f2f2;
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
 
 .exerciseRow input[type="text"] {
   display: inline-block;
@@ -199,3 +182,79 @@
   border: 1px solid #ddd;
 }
 
+/* Style for table header */
+#exerciseTable th {
+  background-color: #dcdada;
+  border: 1px solid #000000;
+  padding: 8px;
+  text-align: left;
+}
+
+.workout-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Three tables per row */
+  gap: 10px; /* Adjust the gap between tables as needed */
+}
+
+/* Style for table body */
+#exerciseTableBody td {
+  border: 1px solid #000000;
+  padding: 8px;
+  background-color: white;
+}
+
+.custom-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  box-sizing: border-box;
+  border-radius: 8px; /* Adjust the value as needed */
+  overflow: hidden;
+}
+
+.table-caption {
+  text-align: center;
+  caption-side: top;
+  background-color: #3e4447;
+  border: 1px solid black;
+  color: #00bfff;
+}
+
+.exercise-table {
+  margin-top: 20px;
+}
+
+#exerciseTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.add-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #4CAF50; /* Green border */
+  color: #fff;
+  background-color: #4CAF50; /* Green background */
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.removeButton {
+  display: inline-block;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #FF6347; /* Red border */
+  color: #FF6347; /* Red text color */
+  background-color: transparent; /* Transparent background */
+  border-radius: 50%; /* Makes the button circular */
+  transition: all 0.3s ease;
+}

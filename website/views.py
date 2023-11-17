@@ -28,11 +28,12 @@ def generate_weight_plot():
     df = pd.DataFrame(data, columns=['Date', 'Weight'])
 
     # Create graph
-    plt.figure(figsize=(10, 6))
-    plt.plot(df['Date'], df['Weight'])
+    plt.plot(df['Date'], df['Weight'], marker='o', linestyle='-', color='blue')
     plt.xlabel('Date')
     plt.ylabel('Weight')
     plt.title('Weight Data Over Time')
+    plt.legend()
+    plt.grid(True)
 
 
     # Save the plot to an image
