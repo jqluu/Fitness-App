@@ -8,7 +8,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     username = db.Column(db.String(150))
     password = db.Column(db.String(150))
-    weightLog = db.relationship('Weight')
+    weightLog = db.relationship('Weight', backref='user', lazy='dynamic')
     workoutLog = db.relationship('Workout')
 
 class Weight(db.Model):

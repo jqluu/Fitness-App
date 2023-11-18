@@ -4,33 +4,46 @@
 <br>
 <head>
   <link rel="stylesheet" type="text/css" href="static/styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <h1>Weight Tracker</h1>
 </head>
 <body>
   <br>
-  <div class="weight-tracker">
-    <ul class="list-group list-group-flush center-list" id="weights">
-      {% for weight in user.weightLog %}
-      <li class="list-group-item weight-item">
-        {{ weight.data }}, {{ weight.date.strftime("%Y-%m-%d") }}
-        <button type="button" class="close" onClick="deleteWeight({{ weight.id }})">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-      {% endfor %}
-    </ul>
 
-    <br>
-    <form method="POST">
-      <label for="weight">Enter Weight:</label>
-      <input type="text" name="weight" id="weight" class="form-control weight-item" required pattern="[0-9]+">
-      
-      <label for="selected-date">Select a past date(optional):</label>
-      <input type="date" name="selected-date" id="selected-date" class="form-control date-item">
+  <div class="weightpage-container">
+    <div class="weightgraph-container">
+      <h2>Weight</h2>
+      <img src="{{ graph_data }}" alt="Graph">
+    </div>
 
-      <br />
-      <button type="submit" class="btn btn-custom">Add weight</button>
-    </form>
+    <div class="weight-tracker">
+      <ul class="list-group list-group-flush center-list" id="weights">
+        {% for weight in sortedByDate %}
+        <li class="list-group-item weight-item">
+          <strong>{{ weight.data }}</strong>, {{ weight.date.strftime("%Y-%m-%d") }}
+          <button type="button" class="close" onClick="deleteWeight({{ weight.id }})">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <br>
+      <form method="POST">
+        <label for="weight">Enter Weight:</label>
+        <input type="text" name="weight" id="weight" class="form-control weight-item" pattern="[0-9]+(\.[0-9]+)?" required>
+        
+        <label for="selected-date">Select a past date(optional):</label>
+        <input type="date" name="selected-date" id="selected-date" class="form-control date-item">
+
+        <br />
+        <button type="submit" class="btn btn-custom">Add weight</button>
+      </form>
+    </div>
+
   </div>
+
 </body>
+
+
 {% endblock %}

@@ -4,6 +4,7 @@
 <br>
 <head>
   <link rel="stylesheet" type="text/css" href="static/styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <h1>Workout Log</h1>
 
   <script src="index.js"></script>
@@ -20,29 +21,38 @@
 
     <div class="workout-wrapper">
       {% for workout in user.workoutLog %}
-      <table id="exerciseTable" class="custom-table">
-        <caption class="table-caption">{{ workout.date.strftime("%m/%d") }}, {{ workout.name }}</caption>
-          <thead>
-            <tr>
-              <th>Exercise</th>
-              <th>Sets</th>
-              <th>Reps</th>
-            </tr>
-
-          </thead>
-
-          <tbody id="exerciseTableBody">
-            {% for exercise in workout.exercises %}
+      <div class="table-container">
+        <table id="exerciseTable" class="custom-table">
+          <caption class="table-caption">
+            <i class="fa-solid fa-calendar-days"></i>
+            {{ workout.date.strftime("%m/%d") }}
+            &nbsp; &nbsp;
+            <i class="fa-solid fa-dumbbell"></i>
+            {{ workout.name }}
+            <button class="delete-button" onclick="deleteWorkout({{ workout.id }})">&times;</button>
+          </caption>
+            <thead>
               <tr>
-                <td>{{ exercise.name }}</td>
-                <td>{{ exercise.sets }}</td>
-                <td>{{ exercise.reps }}</td>
+                <th>Exercise</th>
+                <th>Sets</th>
+                <th>Reps</th>
               </tr>
-            {% endfor %}
-          </tbody>
 
-        </table>
-        {% endfor %}
+            </thead>
+
+            <tbody id="exerciseTableBody">
+              {% for exercise in workout.exercises %}
+                <tr>
+                  <td>{{ exercise.name }}</td>
+                  <td>{{ exercise.sets }}</td>
+                  <td>{{ exercise.reps }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+
+          </table>
+      </div>
+      {% endfor %}
       
     </div>
 
@@ -56,11 +66,11 @@
         <form method="POST">
           
           <label for="selected-date">Date</label>
-          <input type="date" name="selected-date" id="selected-date" class="form-control date-item">
+          <input type="date" name="selected-date" id="selected-date" class="form-control date-item" required>
 
           <br>
           <label for="name">Workout title</label>
-          <input type="text" name="name" id="name" class="form-control name-item" pattern="[A-Za-z0-9]+">
+          <input type="text" name="name" id="name" class="form-control name-item" pattern="[A-Za-z0-9 ]+" required>
 
           <!-- exercise format -->
           <br>
@@ -87,6 +97,7 @@
 
             <div class="centered-content">
               <button type="button" class="add-button" id="addButton">Add Exercise</button>
+              <button type="button" class="add-button" id="addCardioButton">Add Cardio Exercise</button>
             </div>
 
           </div>

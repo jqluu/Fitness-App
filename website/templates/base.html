@@ -15,6 +15,8 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     
 
     <title>{% block title %}Home{% endblock %}</title>
@@ -32,15 +34,39 @@
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav">
           {% if user.is_authenticated %}
-          <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="weighttracker" href="/weighttracker">Weight Tracker</a>
-          <a class="nav-item nav-link" id="workoutlog" href="/workoutlog">Workout Log</a>
-          <a class="nav-item nav-link" id="analytics" href="/analytics">Analytics</a>
-          <a class="nav-item nav-link" id="profile" href="/profile">Profile</a>
-          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          <a class="nav-item nav-link" id="home" href="/">
+            <i class="fa-solid fa-house"></i>
+            Home
+          </a>
+          <a class="nav-item nav-link" id="weighttracker" href="/weighttracker">
+            <i class="fa-solid fa-weight-scale"></i>
+            Weight Tracker
+          </a>
+          <a class="nav-item nav-link" id="workoutlog" href="/workoutlog">
+            <i class="fa-solid fa-dumbbell"></i>
+            Workout Log
+          </a>
+          <a class="nav-item nav-link" id="analytics" href="/analytics">
+            <i class="fa-solid fa-chart-line"></i>
+            Analytics
+          </a>
+          <a class="nav-item nav-link" id="profile" href="/profile">
+            <i class="fa-solid fa-user"></i>
+            Profile
+          </a>
+          <a class="nav-item nav-link" id="logout" href="/logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+          </a>
           {% else %}
-          <a class="nav-item nav-link" id="login" href="/login">Login</a>
-          <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+          <a class="nav-item nav-link" id="login" href="/login">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Login
+          </a>
+          <a class="nav-item nav-link" id="signUp" href="/sign-up">
+            <i class="fa-solid fa-pen-to-square"></i>
+            Sign Up
+          </a>
           {% endif %}
         </div>
 

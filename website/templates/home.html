@@ -4,28 +4,74 @@
 <br>
 <head>
     <link rel="stylesheet" type="text/css" href="static/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <h1>Dashboard</h1>
 </head>
 
 <br>
 
 <div class="home-container">
-    <div class="weight-graph-home">
+
+    <!-- weight -->
+    <div class="dashboard-container">
+        <button class="expand-button" onclick="redirectToWeightTracker()">
+            <i class="fas fa-external-link-alt"></i>
+        </button>
+        <h2>Weight summary:</h2>
+        <img src="{{ graph_data }}" alt="Graph">
+    </div>
+
+    <!-- workout summary -->
+    <div class="dashboard-container">  
+        <button class="expand-button" onclick="redirectToWorkoutLog()">
+            <i class="fas fa-external-link-alt"></i>
+        </button>
+        <h2>Recent Workouts:</h2>
+        <br>
+
+        <ul class="workout-list">
+            {% for workout in user.workoutLog %}
+            <li>
+              <i class="fa-solid fa-calendar-days"></i>
+              {{ workout.date.strftime("%m/%d") }}
+              <i class="fa-solid fa-dumbbell"></i>
+              {{ workout.name }}
+            </li>
+            {% endfor %}
+          </ul>
+
+    </div>
+
+    <!-- consistency -->
+    <div class="dashboard-container">  
+        <button class="expand-button" onclick="redirectToWorkoutLog()">
+            <i class="fas fa-external-link-alt"></i>
+        </button>
+        <h2>Quickstats:</h2>
+    </div>
+
+    <!-- stats summary / quick stats -->
+    <div class="dashboard-container">  
+        <button class="expand-button" onclick="redirectToWorkoutLog()">
+            <i class="fas fa-external-link-alt"></i>
+        </button>
+        <h2>Consistency:</h2>
+    </div>
+
+    <!--  -->
+    <div class="dashboard-container">
+        <button class="expand-button" onclick="redirectToWeightTracker()">
+            <i class="fas fa-external-link-alt"></i>
+        </button>
         <h2>Weight</h2>
         <img src="{{ graph_data }}" alt="Graph">
     </div>
-    <div class="weight-graph-home">
-        <h2>Weight</h2>
-        <img src="{{ graph_data }}" alt="Graph">
+    <div class="dashboard-container">  
     </div>
-    <div class="weight-graph-home">
-        <h2>Weight</h2>
-        <img src="{{ graph_data }}" alt="Graph">
-    </div>
-    <div class="weight-graph-home">
-        <h2>Weight</h2>
-        <img src="{{ graph_data }}" alt="Graph">
-    </div>
+
+   
+
+   
   
 
     

@@ -3,13 +3,33 @@
 
 // weight_tracker delete weight
 function deleteWeight(weightId) {
-    fetch("/delete-weight", {
-      method: "POST",
-      body: JSON.stringify({ weightId: weightId }),
-    }).then((_res) => {
-      window.location.href = "/weighttracker";
-    });
-  }
+  fetch("/delete-weight", {
+    method: "POST",
+    body: JSON.stringify({ weightId: weightId }),
+  }).then((_res) => {
+    window.location.href = "/weighttracker";
+  });
+}
+
+  // weight_tracker delete weight
+function deleteWorkout(workoutId) {
+  fetch("/delete-workout", {
+    method: "POST",
+    body: JSON.stringify({ workoutId: workoutId }),
+  }).then((_res) => {
+    window.location.href = "/workoutlog";
+  });
+}
+
+function redirectToWeightTracker() {
+  // Redirect to the specified URL
+  window.location.href = "/weighttracker";
+}
+
+function redirectToWorkoutLog() {
+  // Redirect to the specified URL
+  window.location.href = "/workoutlog";
+}
 
 
 // Get references to the modal and buttons
@@ -41,6 +61,7 @@ let exerciseId = 0; // To give each exercise input field a unique ID
 
 document.addEventListener('DOMContentLoaded', function() {
     const addButton = document.getElementById('addButton');
+    const addCardioButton = document.getElementById('addCardioButton');
     const exerciseRows = document.getElementById('exerciseRows');
     const form = document.querySelector('#myModal form');
 
@@ -51,9 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         exerciseRow.innerHTML = `
         <div class="exerciseFields">
-            <input type="text" name="exercise_${exerciseId}_name" placeholder="Enter exercise name">
-            <input type="number" name="exercise_${exerciseId}_sets" placeholder="Enter number of sets">
-            <input type="number" name="exercise_${exerciseId}_reps" placeholder="Enter number of reps">
+            <input type="text" name="exercise_${exerciseId}_name" placeholder="Enter exercise name" pattern="[A-Za-z0-9 ]+" required>
+            <input type="number" name="exercise_${exerciseId}_sets" placeholder="Enter number of sets" pattern="[1-9][0-9]*" required>
+            <input type="number" name="exercise_${exerciseId}_reps" placeholder="Enter number of reps" pattern="[1-9][0-9]*" required>
             <button type="button" class="removeButton">X</button>
         </div>
         `;
@@ -61,6 +82,24 @@ document.addEventListener('DOMContentLoaded', function() {
         exerciseRows.appendChild(exerciseRow);
         exerciseId++; // Increment ID for the next exercise
     });
+
+    addCardioButton.addEventListener('click', function() {
+      const exerciseRow = document.createElement('div');
+      exerciseRow.classList.add('exerciseRow');
+
+      exerciseRow.innerHTML = `
+      <div class="exerciseFields">
+          <input type="text" name="exercise_${exerciseId}_name" placeholder="Enter exercise name">
+          <input type="number" name="exercise_${exerciseId}_sets" placeholder="Enter number of sets or laps">
+          <input type="number" name="exercise_${exerciseId}_reps" placeholder="Enter duration(mins)">
+          <button type="button" class="removeButton">X</button>
+      </div>
+      `;
+
+      exerciseRows.appendChild(exerciseRow);
+      exerciseId++; // Increment ID for the next exercise
+  });
+
 
     exerciseRows.addEventListener('click', function(e) {
         if (e.target.classList.contains('removeButton')) {
