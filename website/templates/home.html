@@ -5,7 +5,10 @@
 <head>
     <link rel="stylesheet" type="text/css" href="static/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <h1>Dashboard</h1>
+    <div class="header-container">
+        <h1>Dashboard</h1>
+    </div>
+    
 </head>
 
 <br>
@@ -30,10 +33,11 @@
         <br>
 
         <ul class="workout-list">
-            {% for workout in user.workoutLog %}
+            {% for workout in sorted_workouts %}
             <li>
               <i class="fa-solid fa-calendar-days"></i>
               {{ workout.date.strftime("%m/%d") }}
+              &nbsp; 
               <i class="fa-solid fa-dumbbell"></i>
               {{ workout.name }}
             </li>
@@ -58,12 +62,12 @@
         <h2>Consistency:</h2>
     </div>
 
-    <!--  -->
+    <!-- goals / tips -->
     <div class="dashboard-container">
         <button class="expand-button" onclick="redirectToWeightTracker()">
             <i class="fas fa-external-link-alt"></i>
         </button>
-        <h2>Weight</h2>
+        <h2>Goal</h2>
         <img src="{{ graph_data }}" alt="Graph">
     </div>
     <div class="dashboard-container">  

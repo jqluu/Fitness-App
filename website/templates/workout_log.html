@@ -5,12 +5,15 @@
 <head>
   <link rel="stylesheet" type="text/css" href="static/styles.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <h1>Workout Log</h1>
+  <div class="header-container">
+    <h1>Workout Log</h1>
+  </div>
 
   <script src="index.js"></script>
 </head>
 <body>
 
+  <br>
   <div class="centered-content">
     <button class="btn btn-custom" id="openModalButton"> New workout </button>
   </div>
@@ -20,7 +23,7 @@
     <h2>Recent workouts:</h2>
 
     <div class="workout-wrapper">
-      {% for workout in user.workoutLog %}
+      {% for workout in sorted_workouts %}
       <div class="table-container">
         <table id="exerciseTable" class="custom-table">
           <caption class="table-caption">

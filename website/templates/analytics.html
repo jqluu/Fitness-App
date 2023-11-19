@@ -3,37 +3,46 @@
 {% block content %}
 <br>
 <head>
+    <meta charset='utf-8' />
     <link rel="stylesheet" type="text/css" href="static/styles.css">
-    <h1>Analytics</h1>
+    <div class="header-container">
+        <h1>Analytics</h1>
+    </div>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+              initialView: 'dayGridMonth'
+            });
+            calendar.render();
+          });
+    </script>
 </head>
 
-<br>
 
-<div class="analytics-container">
-    <div class="graph-analytics">
-        <h2>Weight</h2>
-        <img src="{{ graph_data }}" alt="Graph">
+<body>
+    <div class="analytics-container">
+
+        <div class="graph-analytics">
+            <h2>Weight</h2>
+            <img src="{{ graph_data }}" alt="Graph">
+        </div>
+
+        <div class="graph-analytics">
+            <h2>Strength</h2>
+            <img src="{{ graph_data }}" alt="Graph">
+        </div>
+
+
+        <div class="calendar-analytics">
+            <div id='calendar'></div>
+        </div>
+        
+
     </div>
-    <div class="graph-analytics">
-        <h2>Strength</h2>
-        <img src="{{ graph_data }}" alt="Graph">
-    </div>
-    
-  <!-- 
-    strength graphs: split between diff workout typs
-    consistency: 
-        -goal:
-        -streak:
-        -%: start date -> total weeks
-            - how many weeks consistent / total weeks
-            - or maybe how many days consistent
-            - days / (total weeks * goal)
 
-   -->
+</body>
 
-    
 
-</div>
-    
-    
 {% endblock %}

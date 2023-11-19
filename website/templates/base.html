@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="static/styles.css">
     <link
       rel="stylesheet"
@@ -36,7 +37,7 @@
           {% if user.is_authenticated %}
           <a class="nav-item nav-link" id="home" href="/">
             <i class="fa-solid fa-house"></i>
-            Home
+            <span class="text-highlight">Gymstats</span>
           </a>
           <a class="nav-item nav-link" id="weighttracker" href="/weighttracker">
             <i class="fa-solid fa-weight-scale"></i>
@@ -51,12 +52,7 @@
             Analytics
           </a>
           <a class="nav-item nav-link" id="profile" href="/profile">
-            <i class="fa-solid fa-user"></i>
-            Profile
-          </a>
-          <a class="nav-item nav-link" id="logout" href="/logout">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            Logout
+            <i class="fa-solid fa-user"></i> {{ user.username }}
           </a>
           {% else %}
           <a class="nav-item nav-link" id="login" href="/login">
@@ -72,7 +68,11 @@
 
         <div class="navbar-nav ml-auto"> <!-- Right-aligned column -->
           {% if user.is_authenticated %}
-          <a class="nav-item nav-link" id="profile" href="/profile">{{ user.username }}</a>
+          <a class="nav-item nav-link" id="logout" href="/logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+          </a>
+          
           {% endif %}
         </div>    
     

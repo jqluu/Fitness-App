@@ -5,17 +5,21 @@
 <head>
   <link rel="stylesheet" type="text/css" href="static/styles.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-  <h1>Weight Tracker</h1>
+  <div class="header-container">
+    <h1>Weight Tracker</h1>
+  </div>
 </head>
 <body>
   <br>
 
+  <!-- graph -->
   <div class="weightpage-container">
     <div class="weightgraph-container">
       <h2>Weight</h2>
       <img src="{{ graph_data }}" alt="Graph">
     </div>
 
+    <!-- tracker -->
     <div class="weight-tracker">
       <ul class="list-group list-group-flush center-list" id="weights">
         {% for weight in sortedByDate %}

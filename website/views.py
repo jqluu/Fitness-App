@@ -20,6 +20,7 @@ import sqlite3
 from datetime import datetime  
 from datetime import date
 from sqlalchemy import desc
+from operator import attrgetter
 
 def generate_weight_plot_data():
     sortedByDate = current_user.weightLog.order_by(Weight.date.asc()).all()
@@ -32,6 +33,9 @@ def update_weight_plot(weight_data):
 
     # Convert Date column to datetime if it's not already in datetime format
     df['Date'] = pd.to_datetime(df['Date'])
+
+    plt.gcf().set_facecolor('grey')
+
 
     plt.plot(df['Date'], df['Weight'], marker='o', linestyle='-', color='blue')
     plt.xlabel('Date')
@@ -72,12 +76,13 @@ views = Blueprint('views', __name__)
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+    sorted_workouts = sorted(current_user.workoutLog, key=attrgetter('date'))
 
     weight_data = generate_weight_plot_data()
     weight_plot_image = update_weight_plot(weight_data)
     # print("graph_data:", graph_data)
 
-    return render_template("home.html", user=current_user, graph_data=weight_plot_image)
+    return render_template("home.html", user=current_user, graph_data=weight_plot_image, sorted_workouts=sorted_workouts)
     
 
 # weight tracker
@@ -137,6 +142,9 @@ def delete_weight():
 @views.route('/workoutlog', methods=['GET', 'POST'])
 @login_required
 def workoutlog():
+
+    sorted_workouts = sorted(current_user.workoutLog, key=attrgetter('date'))
+
     if request.method == 'POST':
         print(request.content_type)
 
@@ -166,7 +174,8 @@ def workoutlog():
         db.session.commit()
         flash('Workout added.', category='success')
 
-    return render_template("workout_log.html", user=current_user)
+
+    return render_template("workout_log.html", user=current_user, sorted_workouts=sorted_workouts)
 
 # delete workout
 @views.route('/delete-workout', methods=['POST'])
