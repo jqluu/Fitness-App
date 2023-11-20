@@ -17,6 +17,10 @@
   h1 {
     text-align: center;
     color: white;
+    /* text-decoration: underline; */
+    text-decoration-thickness: 2px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   }
 
   h2 {
@@ -42,6 +46,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content:center;
+}
+
+.weightgraph-container img {
+  max-width: 100%; /* Adjust the maximum width to fit the container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.dashboard-container img {
+  max-width: 100%; /* Adjust the maximum width to fit the container */
+  height: auto; /* Maintain aspect ratio */
 }
 
 .dashboard-container {
@@ -103,7 +117,7 @@
     
     position: relative;
     color:#00bfff;
-    width: calc(25% - 10px); /* Adjust the width and any spacing as needed */
+    width: calc(32% - 10px); /* Adjust the width and any spacing as needed */
     margin: 5px; /* Add spacing between the divs */
     background-color: #3e4447; /* Background color for the divs */
     padding: 15px;
@@ -117,7 +131,7 @@
     
     position: relative;
     color:#00bfff;
-    width: calc(20% - 10px); /* Adjust the width and any spacing as needed */
+    width: calc(29% - 10px); /* Adjust the width and any spacing as needed */
     margin: 5px; /* Add spacing between the divs */
     background-color: #3e4447; /* Background color for the divs */
     padding: 15px;
