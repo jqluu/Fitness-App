@@ -1,5 +1,15 @@
 // javascript functions
 
+// confirm delete weight
+function confirmDeleteWeight(weightId) {
+  var confirmed = window.confirm('Are you sure you want to delete this weight?');
+  if (confirmed) {
+      // Call the delete function if user confirms
+      deleteWeight(weightId);
+  } else {
+      // Do nothing or handle cancellation
+  }
+}
 
 // weight_tracker delete weight
 function deleteWeight(weightId) {
@@ -11,7 +21,19 @@ function deleteWeight(weightId) {
   });
 }
 
-  // weight_tracker delete weight
+
+// confirm delete
+function confirmDeleteWorkout(workoutId) {
+  var confirmed = window.confirm('Are you sure you want to delete this workout?');
+  if (confirmed) {
+      // Call the delete function if user confirms
+      deleteWorkout(workoutId);
+  } else {
+      // Do nothing or handle cancellation
+  }
+}
+
+  // workout log delete weight
 function deleteWorkout(workoutId) {
   fetch("/delete-workout", {
     method: "POST",
@@ -31,6 +53,9 @@ function redirectToWorkoutLog() {
   window.location.href = "/workoutlog";
 }
 
+function redirectToAnalytics() {
+  window.location.href = "/analytics";
+}
 
 // Get references to the modal and buttons
 const modal = document.getElementById("myModal");

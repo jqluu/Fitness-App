@@ -14,6 +14,8 @@ import io
 import base64
 import pandas as pd
 
+from website.functions import update_weight_plot, weeklyWorkoutCount, weightChange
+
 # db
 from . import db
 import sqlite3
@@ -27,62 +29,28 @@ def generate_weight_plot_data():
     data = [(weight.date, float(weight.data)) for weight in sortedByDate]
     return data
 
-# Function to update the weight plot
-def update_weight_plot(weight_data):
-    df = pd.DataFrame(weight_data, columns=['Date', 'Weight'])
-
-    # Convert Date column to datetime if it's not already in datetime format
-    df['Date'] = pd.to_datetime(df['Date'])
-
-    plt.gcf().set_facecolor('grey')
-
-
-    plt.plot(df['Date'], df['Weight'], marker='o', linestyle='-', color='blue')
-    plt.xlabel('Date')
-    plt.ylabel('Weight')
-    plt.title('Weight Data Over Time')
-    plt.grid(True)
-
-    # Format x-axis ticks to show month and day only (exclude year)
-    plt.gcf().autofmt_xdate()  # Rotates the dates for better readability
-    plt.gca().xaxis.set_major_formatter(plt.matplotlib.dates.DateFormatter('%m-%d'))
-
-    # Extract unique years from the data
-    unique_years = df['Date'].dt.year.unique()
-
-    # Display each unique year as a label on the plot
-    for year in unique_years:
-        year_data = df[df['Date'].dt.year == year]
-        plt.text(
-            year_data['Date'].iloc[0],  # x-coordinate for the label
-            year_data['Weight'].max(),  # y-coordinate for the label (adjust as needed)
-            f"Year: {year}",  # Text to display (Year: XXXX)
-            ha='left', va='center',  # Alignment of the text
-            fontsize=10,  # Adjust font size as needed
-            color='gray'  # Text color
-        )
-
-    img = io.BytesIO()
-    plt.savefig(img, format='png')
-    img.seek(0)
-
-    img_data_uri = f"data:image/png;base64, {base64.b64encode(img.read()).decode()}"
-    return img_data_uri
-
-
 views = Blueprint('views', __name__)
 
 # home / dash
 @views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
+
+    # recent workouts
     sorted_workouts = sorted(current_user.workoutLog, key=attrgetter('date'))
 
+    # weight summary
     weight_data = generate_weight_plot_data()
     weight_plot_image = update_weight_plot(weight_data)
     # print("graph_data:", graph_data)
 
-    return render_template("home.html", user=current_user, graph_data=weight_plot_image, sorted_workouts=sorted_workouts)
+    # quickstats
+    workout_count = weeklyWorkoutCount(current_user)
+    count_goal = 4
+    #weight change
+    weight_changes = weightChange(current_user)
+
+    return render_template("home.html", user=current_user, graph_data=weight_plot_image, sorted_workouts=sorted_workouts, workout_count=workout_count, count_goal=count_goal, weight_changes=weight_changes)
     
 
 # weight tracker
@@ -200,7 +168,22 @@ def analytics():
     weight_plot_image = update_weight_plot(weight_data)
     #debug
     #print("graph_data:", graph_data)
-    return render_template("analytics.html", user=current_user, graph_data=weight_plot_image)
+
+    # calendar events
+    workouts = Workout.query.all()
+
+    # Convert Workout instances to a list of dictionaries
+    events = []
+    for workout in workouts:
+        event = {
+            'title': workout.name,
+            'start': workout.date.strftime('%Y-%m-%d')
+        }
+        events.append(event)
+
+
+
+    return render_template("analytics.html", user=current_user, graph_data=weight_plot_image, events=events)
 
 
 # profile

@@ -13,10 +13,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-              initialView: 'dayGridMonth'
+                initialView: 'dayGridMonth',
+                // marked events
+                events: {{ events | tojson | safe }} // Pass the events JSON here
             });
             calendar.render();
-          });
+        });
     </script>
 </head>
 

@@ -25,7 +25,7 @@
         {% for weight in sortedByDate %}
         <li class="list-group-item weight-item">
           <strong>{{ weight.data }}</strong>, {{ weight.date.strftime("%Y-%m-%d") }}
-          <button type="button" class="close" onClick="deleteWeight({{ weight.id }})">
+          <button type="button" class="close" onClick="confirmDeleteWeight({{ weight.id }})">
             <span aria-hidden="true">&times;</span>
           </button>
         </li>

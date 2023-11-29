@@ -48,6 +48,32 @@
   justify-content:center;
 }
 
+.colored-text {
+  color:#00bfff;
+}
+
+.quickstats {
+  color:white;
+  font-size: 25px;
+  background-color: rgba(255, 255, 255, 0.2); /* Adjust alpha (4th value) for transparency */
+  padding: 10px; /* Add padding for better appearance */
+  border-radius: 8px; /* Add rounded corners */
+}
+
+.profile-container {
+  text-align: center;
+  color: white;
+}
+
+.profile-info img {
+  width: 150px; /* Set the width of the image */
+  height: 150px; /* Set the height of the image */
+  border-radius: 50%; /* Apply a circular border radius for a rounded shape */
+  object-fit: cover; /* Ensure the image covers the entire area */
+  border: 2px solid #00bfff; /* Optional: Add a border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow effect */
+}
+
 .weightgraph-container img {
   max-width: 100%; /* Adjust the maximum width to fit the container */
   height: auto; /* Maintain aspect ratio */
@@ -160,8 +186,8 @@
 
   #calendar {
     margin-top: 20px; /* Adjust as needed */
-    background-color: #f8f8f8; /* Set a background color */
-    border: 1px solid #ccc; /* Add a border */
+    background-color: #656565; /* Set a background color */
+    border: 1px solid #000000; /* Add a border */
     color: #000000;
   }
   

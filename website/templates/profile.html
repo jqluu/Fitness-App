@@ -5,17 +5,53 @@
 <head>
     <link rel="stylesheet" type="text/css" href="static/styles.css">
     <h1>{{ username }}'s profile</h1>
+    <script src="index.js"></script>
 </head>
 <body>
-    <!-- Other profile content goes here -->
+  <!-- modal button -->
+  <div class="centered-content">
+    <button class="btn btn-custom" id="openModalButton"> Edit profile </button>
+  </div>
+  <br>
+ 
+   <!-- modal form --> 
 
-    <!-- stats -->
 
+  <!-- profile info -->
+  <div class="profile-container">
+      <section class="profile-info">
+        <!-- profile picture -->
+        <img 
+        src="user_avatar.jpg" 
+        alt="User Avatar"
+        onerror="this.onerror=null; this.src='{{ url_for('static', filename='img/defaultpic.jpg') }}';"
+        >
+        <br><br>
 
-    <!-- container 1 row, 3 col, can be expanded
-    for featured workouts -->
+        <!-- user info -->
+        <h2>John Doe</h2>
+        <p>Email: {{ current_user.email }}</p>
+        <p>Location: New York, USA</p>
+
+      </section>
+  
+      <section class="profile-details">
+        <h3>About Me</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget libero ut dolor lacinia aliquet.</p>
+        <!-- Additional details about the user -->
+      </section>
+  </div>
 
 
 
 </body>
 {% endblock %}
+
+
+ <!-- Other profile content goes here -->
+
+  <!-- stats -->
+
+
+  <!-- container 1 row, 3 col, can be expanded
+  for featured workouts -->

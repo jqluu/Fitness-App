@@ -39,7 +39,7 @@
               {{ workout.date.strftime("%m/%d") }}
               &nbsp; 
               <i class="fa-solid fa-dumbbell"></i>
-              {{ workout.name }}
+              {{ workout.name }} 
             </li>
             {% endfor %}
           </ul>
@@ -48,10 +48,42 @@
 
     <!-- consistency -->
     <div class="dashboard-container">  
-        <button class="expand-button" onclick="redirectToWorkoutLog()">
+        <button class="expand-button" onclick="redirectToAnalytics()">
             <i class="fas fa-external-link-alt"></i>
         </button>
         <h2>Quickstats:</h2>
+        <br><br>
+        <div class="quickstats">
+            <!-- weekly workout count / goal -->
+            Weekly workout goal: {{ workout_count }} / {{ count_goal }}  <br>  
+
+            {% if workout_count < count_goal %}
+                <span class="colored-text">You got this!</span>
+            {% elif workout_count >= count_goal %}
+                <span class="colored-text">Good job!</span>
+            {% endif %}
+        </div>
+        <br>
+        <div class="quickstats">
+            <!-- weekly workout count / goal -->
+            Weight change in the last two weeks: 
+            
+            <span class="colored-text">
+                <br> {{ weight_changes }} lbs
+                {% if weight_changes > 0 %}
+                    <i class="fa-solid fa-arrow-up"></i>
+                {% elif weight_changes < 0 %}
+                    <i class="fa-solid fa-arrow-down"></i>
+                {% endif %}
+            </span>
+        </div>
+        <br>
+        <div class="quickstats">
+            <!-- weekly workout count / goal -->
+            
+        </div>
+
+
     </div>
 
     <!-- stats summary / quick stats -->
