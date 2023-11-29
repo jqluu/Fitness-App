@@ -8,37 +8,39 @@
   <h1>Login</h1>
 </head>
 <body></body>
-<form method="POST">
-    <div class="form-group">
-        <label for="email">Email Address</label> 
-        <input 
-            type="email" 
-            class="form-control" 
-            id="email" 
-            name="email" 
-            placeholder="Enter email"
-        />
-    </div> <!-- Close the first form-group div here -->
-    
-    <br>
+<div class="centered-form">
+    <form method="POST">
+        <div class="form-group">
+            
+            <input 
+                type="email" 
+                class="form-control" 
+                id="email" 
+                name="email" 
+                placeholder="Enter email"
+            />
+        </div> <!-- Close the first form-group div here -->
+        
+        <br>
 
-    <!-- Open a new form-group div for the password field -->
-    <div class="form-group">
-        <label for="password">Password</label> 
-        <input 
-            type="password" 
-            class="form-control" 
-            id="password" 
-            name="password" 
-            placeholder="Enter password"
-        />
-    </div>
-    
-    <br />
+        <!-- Open a new form-group div for the password field -->
+        <div class="form-group">
+            
+            <input 
+                type="password" 
+                class="form-control" 
+                id="password" 
+                name="password" 
+                placeholder="Enter password"
+            />
+        </div>
+        
+        <br />
 
-    <div class="centered-content">
-        <button type="submit" class="btn btn-primary">Login</button>
-    </div>
+        <div class="centered-content">
+            <button type="submit" class="btn btn-custom">Login</button>
+        </div>
 
-</form>
+    </form>
+</div>
 {% endblock %}

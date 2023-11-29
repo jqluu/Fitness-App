@@ -227,6 +227,7 @@
   margin-bottom: 10px;
 }
 
+
 .exercise-list {
   display: flex;
   flex-direction: column;
@@ -258,6 +259,10 @@
   overflow-y: auto; /* Enable vertical scrolling */
 }
 
+.form-control {
+  max-width: 50%;
+}
+
 .workout-log-page {
   padding: 20px;
 }
@@ -282,9 +287,16 @@
   margin-bottom: 5px; /* Space between labels and inputs */
 }
 
+
+
 .form-group {
-  margin: 0 10px; /* Adjust the horizontal margin as needed */
+  display: flex;
+  justify-content: center; /* Horizontally center content */
+  align-items: center;
+  margin-bottom: 10px;
+  color: white;
 }
+
 
 .centered-content {
   text-align: center;

@@ -4,17 +4,103 @@
 <br>
 <head>
     <link rel="stylesheet" type="text/css" href="static/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <h1>{{ username }}'s profile</h1>
     <script src="index.js"></script>
 </head>
 <body>
   <!-- modal button -->
   <div class="centered-content">
-    <button class="btn btn-custom" id="openModalButton"> Edit profile </button>
+    <button class="btn btn-custom" id="openModalButton"> 
+      Edit profile
+      <i class="fa-solid fa-gear"></i>
+    </button>
   </div>
   <br>
  
    <!-- modal form --> 
+   <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModalButton">&times;</span>
+
+      <form method="POST">
+
+        <p><b>Profile info:</b></p>
+
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" class="form-control name-item" pattern="[A-Za-z0-9 ]+" required>
+        <br>
+
+        <label for="bio">Bio</label>
+        <textarea name="bio" id="bio" class="form-control" rows="4" cols="50"></textarea>
+        <br>
+
+        <p><b>Personal info:</b></p>
+
+        <label for="height">Age</label>
+        <br>
+        
+        <input type="number" id="age" name="age" min="1" max="130" required>
+        <br>
+        <br>
+
+        <label for="height">Gender</label>
+        <br>
+
+        <label for="option1">
+          <input type="radio" id="option1" name="genderOptions" value="option1" required>
+          Male
+        </label><br>
+  
+        <label for="option2">
+          <input type="radio" id="option2" name="genderOptions" value="option2">
+          Female
+        </label><br>
+        <br>
+
+        <label for="height">Height</label>
+        <br>
+        
+        <label for="feet">Feet:</label>
+        <input type="number" id="feet" name="feet" min="0" max="8" required>
+        <br>
+
+        <label for="inches">Inches:</label>
+        <input type="number" id="inches" name="inches" min="0" max="11" required>
+        <br>
+        <br>        
+
+        <label for="goals">Regarding weight goals, you want to: </label>
+        <br>
+
+        <label for="option1">
+          <input type="radio" id="option1" name="weightOptions" value="option1" required>
+          Gain
+        </label><br>
+  
+        <label for="option2">
+          <input type="radio" id="option2" name="weightOptions" value="option2">
+          Maintain
+        </label><br>
+  
+        <label for="option3">
+          <input type="radio" id="option3" name="weightOptions" value="option3">
+          Lose
+        </label>
+        <br>
+        <br>
+
+        <label for="feet">How many days a week do you want to workout?</label>
+        <input type="number" id="weekly-goal" name="weekly-goal" min="0" max="7" required>
+        <br>
+
+
+        <div class="centered-content">
+          <button type="submit" class="btn btn-custom">Confirm</button>
+        </div>
+      </form>
+    </div>
+   </div>
 
 
   <!-- profile info -->
@@ -31,7 +117,6 @@
         <!-- user info -->
         <h2>John Doe</h2>
         <p>Email: {{ current_user.email }}</p>
-        <p>Location: New York, USA</p>
 
       </section>
   
