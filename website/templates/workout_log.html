@@ -28,28 +28,44 @@
           <caption class="table-caption">
             <i class="fa-solid fa-calendar-days"></i>
             {{ workout.date.strftime("%m/%d") }}
-            &nbsp; &nbsp;
-            <i class="fa-solid fa-dumbbell"></i>
-            {{ workout.name }}
+            &nbsp; 
+            
+            <b>{{ workout.name }}</b>
             <button class="delete-button" onclick="confirmDeleteWorkout({{ workout.id }})">&times;</button>
           </caption>
             <thead>
               <tr>
                 <th>Exercise</th>
+                <th>Weight</th>
                 <th>Sets</th>
                 <th>Reps</th>
+                <th>Duration</th>
               </tr>
 
             </thead>
 
             <tbody id="exerciseTableBody">
-              {% for exercise in workout.exercises %}
-                <tr>
+            {% for exercise in workout.exercises %}
+              <tr>
                   <td>{{ exercise.name }}</td>
-                  <td>{{ exercise.sets }}</td>
-                  <td>{{ exercise.reps }}</td>
-                </tr>
-              {% endfor %}
+                  
+                    {% if exercise.type == 'weightTraining' %}
+                      <td>{{ exercise.weight }} lbs</td>     
+                      <td>{{ exercise.sets }}</td>
+                      <td>{{ exercise.reps }}</td>
+                      <td></td>
+                    {% endif %}
+
+                  
+                    {% if exercise.type == 'cardio' %}
+                      <td></td>
+                      <td>{{ exercise.sets }}</td>
+                      <td></td>
+                      <td>{{ exercise.reps }} mins</td>
+                    {% endif %}
+                  
+              </tr>
+            {% endfor %}
             </tbody>
 
           </table>
@@ -81,6 +97,7 @@
               <thead>
                 <tr>
                   <th>Exercise</th>
+                  <th>Weight</th>
                   <th>Sets</th>
                   <th>Reps</th>
                 </tr>

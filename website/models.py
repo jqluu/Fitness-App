@@ -13,6 +13,22 @@ class User(db.Model, UserMixin):
     # data
     weightLog = db.relationship('Weight', backref='user', lazy='dynamic')
     workoutLog = db.relationship('Workout')
+    user_info = db.relationship('UserInfo', backref='user', uselist=False)
+
+class UserInfo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30))
+    bio = db.Column(db.String(100))
+    age = db.Column(db.Integer)
+    gender = db.Column(db.String(10))
+    height = db.Column(db.Integer)
+    weightGoal = db.Column(db.String(10))
+    weeklyGoal = db.Column(db.Integer)
+
+    # Foreign key to link UserInfo with User
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+
 
 class Weight(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,8 +37,9 @@ class Weight(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
+
 # workout/exercise
-# Define the association table for the many-to-many relationship
+# many-to-many relationship
 workout_exercise = db.Table(
     'workout_exercise',
     db.Column('workout_id', db.Integer, db.ForeignKey('workout.id')),
@@ -47,6 +64,8 @@ class Workout(db.Model):
 class Exercise(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
+    type = db.Column(db.String(20))
+    weight = db.Column(db.Integer)
     sets = db.Column(db.Integer)
     reps = db.Column(db.Integer)
 

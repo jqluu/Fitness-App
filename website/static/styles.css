@@ -310,7 +310,7 @@
 .exerciseRow input[type="text"] {
   display: inline-block;
   margin-bottom: 5px;
-  width: calc(43% - 10px); /* Set a wider width for the exercise name field */
+  width: calc(40% - 10px); /* Set a wider width for the exercise name field */
   padding: 8px;
   box-sizing: border-box;
 }
@@ -318,7 +318,7 @@
 .exerciseRow input[type="number"] {
   display: inline-block;
   margin-bottom: 5px;
-  width: calc(27% - 10px); /* Set a narrower width for sets and reps fields */
+  width: calc(18% - 10px); /* Set a narrower width for sets and reps fields */
   padding: 8px;
   box-sizing: border-box;
 }
@@ -337,6 +337,16 @@
   border: 1px solid #000000;
   padding: 8px;
   text-align: left;
+}
+
+#exerciseTable th:nth-child(1) {
+  width: 40%;
+}
+
+#exerciseTable th:nth-child(2),
+#exerciseTable th:nth-child(3),
+#exerciseTable th:nth-child(4) {
+  width: 15%;
 }
 
 .workout-wrapper {

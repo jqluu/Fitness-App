@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, UserInfo
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
@@ -50,6 +50,12 @@ def sign_up():
         else:
             # adding new user to db
             new_user = User(email=email, username=username, password=generate_password_hash(password, method='sha256'))
+
+            # default user info
+            default_user_info = UserInfo(name='John Doe', bio='Please set up your profile', age=25, gender='Male', height=3, weightGoal='Maintain', weeklyGoal = 3)
+
+            new_user.user_info = default_user_info
+
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)

@@ -10,7 +10,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 # models
-from .models import Weight, Workout, Exercise, workout_exercise, User
+from .models import Weight, Workout, Exercise, workout_exercise, User, UserInfo
 
 # weight avg
 from collections import defaultdict
@@ -100,3 +100,27 @@ def weightChange(user):
         return weight_change
     else:
         return 0
+
+
+# calc maintCals
+def calcMaintCals(user):
+
+    maintCals = 0
+    weight = Weight.query.filter_by(user_id=user.id).order_by(Weight.date.desc()).first()
+    weight_data = int(weight.data)
+
+    if (user.user_info.gender == 'Male'):
+        maintCals = 66 + (6.23 * weight_data) + (12.7 * user.user_info.height) - (6.8 * user.user_info.age)
+    elif (user.user_info.gender == 'Female'):
+        maintCals = 655 + (4.35 * weight_data) + (4.7 * user.user_info.height) - (4.7 * user.user_info.age)
+
+
+    return round(maintCals)
+
+
+def calcProtein(user):
+
+    weight = Weight.query.filter_by(user_id=user.id).order_by(Weight.date.desc()).first()
+    weight_data = int(weight.data)
+
+    return round(0.7 * weight_data)

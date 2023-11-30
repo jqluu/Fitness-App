@@ -46,7 +46,7 @@
 
     </div>
 
-    <!-- consistency -->
+    <!-- quickstats -->
     <div class="dashboard-container">  
         <button class="expand-button" onclick="redirectToAnalytics()">
             <i class="fas fa-external-link-alt"></i>
@@ -78,21 +78,12 @@
             </span>
         </div>
         <br>
-        <div class="quickstats">
-            <!-- weekly workout count / goal -->
-            Caloric Maintenance:
-
-            <span class="colored-text">
-                <br> ~1900
-
-            </span>
-
-        </div>
+        
 
 
     </div>
 
-    <!-- stats summary / quick stats -->
+    <!-- daily check-in -->
     <div class="dashboard-container">  
         <button class="expand-button" onclick="redirectToWorkoutLog()">
             <i class="fas fa-external-link-alt"></i>
@@ -101,15 +92,16 @@
     </div>
 
     <!-- goals / tips -->
-    <div class="dashboard-container">
+    <!-- <div class="dashboard-container">
         <button class="expand-button" onclick="redirectToWeightTracker()">
             <i class="fas fa-external-link-alt"></i>
         </button>
         <h2>Goal</h2>
         <img src="{{ graph_data }}" alt="Graph">
-    </div>
+    </div> -->
 
 
+    <!-- guide -->
     <div class="dashboard-container">  
         <h2>Guide</h2>
         <br>
@@ -118,7 +110,18 @@
             Recommended daily protein intake:
 
             <span class="colored-text">
-                <br> 100g
+                <br> ~ {{ recProtein }}g
+
+            </span>
+        </div>
+        <br>
+
+        <div class="quickstats">
+            <!-- weekly workout count / goal -->
+            Caloric Maintenance:
+
+            <span class="colored-text">
+                <br> ~ {{ maintCals }}
 
             </span>
 

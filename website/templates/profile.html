@@ -28,32 +28,34 @@
         <p><b>Profile info:</b></p>
 
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" class="form-control name-item" pattern="[A-Za-z0-9 ]+" required>
+        <input type="text" name="name" id="name" class="form-control name-item" pattern="[A-Za-z0-9 ]+" required
+        value="{{ current_user.user_info.name }}">
         <br>
 
         <label for="bio">Bio</label>
-        <textarea name="bio" id="bio" class="form-control" rows="4" cols="50"></textarea>
+        <textarea name="bio" id="bio" class="form-control" rows="4" cols="50">{{ current_user.user_info.bio }}</textarea>
         <br>
 
         <p><b>Personal info:</b></p>
 
-        <label for="height">Age</label>
+        <label for="age">Age</label>
         <br>
         
-        <input type="number" id="age" name="age" min="1" max="130" required>
+        <input type="number" id="age" name="age" min="1" max="130" required
+        value="{{ current_user.user_info.age }}">
         <br>
         <br>
 
-        <label for="height">Gender</label>
+        <label for="gender">Gender</label>
         <br>
 
         <label for="option1">
-          <input type="radio" id="option1" name="genderOptions" value="option1" required>
+          <input type="radio" id="option1" name="genderOptions" value="Male" required>
           Male
         </label><br>
   
         <label for="option2">
-          <input type="radio" id="option2" name="genderOptions" value="option2">
+          <input type="radio" id="option2" name="genderOptions" value="Female">
           Female
         </label><br>
         <br>
@@ -62,11 +64,13 @@
         <br>
         
         <label for="feet">Feet:</label>
-        <input type="number" id="feet" name="feet" min="0" max="8" required>
+        <input type="number" id="feet" name="feet" min="0" max="8" required
+        value="{{ feet }}">
         <br>
 
         <label for="inches">Inches:</label>
-        <input type="number" id="inches" name="inches" min="0" max="11" required>
+        <input type="number" id="inches" name="inches" min="0" max="11" required
+        value="{{ inches }}">
         <br>
         <br>        
 
@@ -74,24 +78,25 @@
         <br>
 
         <label for="option1">
-          <input type="radio" id="option1" name="weightOptions" value="option1" required>
+          <input type="radio" id="option1" name="weightOptions" value="Gain" required>
           Gain
         </label><br>
   
         <label for="option2">
-          <input type="radio" id="option2" name="weightOptions" value="option2">
+          <input type="radio" id="option2" name="weightOptions" value="Maintain">
           Maintain
         </label><br>
   
         <label for="option3">
-          <input type="radio" id="option3" name="weightOptions" value="option3">
+          <input type="radio" id="option3" name="weightOptions" value="Lose">
           Lose
         </label>
         <br>
         <br>
 
-        <label for="feet">How many days a week do you want to workout?</label>
-        <input type="number" id="weekly-goal" name="weekly-goal" min="0" max="7" required>
+        <label for="weekly-goal">How many days a week do you want to workout?</label>
+        <input type="number" id="weekly-goal" name="weekly-goal" min="0" max="7" required
+        value="{{ current_user.user_info.weeklyGoal }}">
         <br>
 
 
@@ -115,14 +120,14 @@
         <br><br>
 
         <!-- user info -->
-        <h2>John Doe</h2>
-        <p>Email: {{ current_user.email }}</p>
+        <h2>{{ current_user.user_info.name }}, {{ current_user.user_info.age }}</h2>
+        <p>{{ current_user.email }}</p>
 
       </section>
   
       <section class="profile-details">
         <h3>About Me</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget libero ut dolor lacinia aliquet.</p>
+        <p>{{ current_user.user_info.bio }}</p>
         <!-- Additional details about the user -->
       </section>
   </div>

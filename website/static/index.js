@@ -97,7 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         exerciseRow.innerHTML = `
         <div class="exerciseFields">
-            <input type="text" name="exercise_${exerciseId}_name" placeholder="Enter exercise name" pattern="[A-Za-z0-9 ]+" required>
+            <input type="text" name="exercise_${exerciseId}_name" placeholder="Enter exercise name (weight training)" pattern="[A-Za-z0-9 ]+" required>
+            <input type="number" name="exercise_${exerciseId}_weight" placeholder="Enter weight" pattern="[1-9][0-9]*" required>
             <input type="number" name="exercise_${exerciseId}_sets" placeholder="Enter number of sets" pattern="[1-9][0-9]*" required>
             <input type="number" name="exercise_${exerciseId}_reps" placeholder="Enter number of reps" pattern="[1-9][0-9]*" required>
             <button type="button" class="removeButton">X</button>
@@ -114,9 +115,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
       exerciseRow.innerHTML = `
       <div class="exerciseFields">
-          <input type="text" name="exercise_${exerciseId}_name" placeholder="Enter exercise name">
-          <input type="number" name="exercise_${exerciseId}_sets" placeholder="Enter number of sets or laps">
-          <input type="number" name="exercise_${exerciseId}_reps" placeholder="Enter duration(mins)">
+          <input type="text" name="exercise_${exerciseId}_name" placeholder="Enter exercise name (cardio)" required>
+          <input type="number" name="exercise_${exerciseId}_sets" placeholder="Enter number of sets or laps" required>
+          <input type="number" name="exercise_${exerciseId}_reps" placeholder="Enter duration(mins)" required>
           <button type="button" class="removeButton">X</button>
       </div>
       `;
@@ -137,13 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const title = document.getElementById('name').value;
       const date = document.getElementById('selected-date').value;
   
-      const exerciseData = [
-        // sample data
-        // { name: 'Push-ups', sets: 3, reps: 12 },
-        // { name: 'Squats', sets: 4, reps: 10 },
-        // { name: 'Plank', sets: 3, reps: 30 },
-        // Add more exercise objects as needed
-      ];
+      const exerciseData = [];
       const exerciseRows = document.querySelectorAll('.exerciseRow');
   
       exerciseRows.forEach(row => {
@@ -152,6 +147,14 @@ document.addEventListener('DOMContentLoaded', function() {
           sets: row.querySelector('input[name^="exercise_"][name$="_sets"]').value,
           reps: row.querySelector('input[name^="exercise_"][name$="_reps"]').value
         };
+
+        const weightInput = row.querySelector('input[name^="exercise_"][name$="_weight"]');
+        if (weightInput && weightInput.value !== '') {
+            exercise.weight = weightInput.value;
+            exercise.type = "weightTraining";
+        } else {
+            exercise.type = "cardio";
+        }
   
         exerciseData.push(exercise);
       });
@@ -166,6 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
             title: title,
             date: date,
             exercises: exerciseData
+
         })
       })
       .then(response => response.text())

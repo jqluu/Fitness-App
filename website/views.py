@@ -14,7 +14,7 @@ import io
 import base64
 import pandas as pd
 
-from website.functions import update_weight_plot, weeklyWorkoutCount, weightChange
+from website.functions import update_weight_plot, weeklyWorkoutCount, weightChange, calcMaintCals, calcProtein
 
 # db
 from . import db
@@ -46,11 +46,15 @@ def home():
 
     # quickstats
     workout_count = weeklyWorkoutCount(current_user)
-    count_goal = 4
-    #weight change
+    count_goal = current_user.user_info.weeklyGoal
+    # weight change
     weight_changes = weightChange(current_user)
+    # maintenance calories
+    maintCals = calcMaintCals(current_user)
+    # rec protein intake
+    recProtein = calcProtein(current_user)
 
-    return render_template("home.html", user=current_user, graph_data=weight_plot_image, sorted_workouts=sorted_workouts, workout_count=workout_count, count_goal=count_goal, weight_changes=weight_changes)
+    return render_template("home.html", user=current_user, graph_data=weight_plot_image, sorted_workouts=sorted_workouts, workout_count=workout_count, count_goal=count_goal, weight_changes=weight_changes, maintCals=maintCals, recProtein=recProtein)
     
 
 # weight tracker
@@ -114,7 +118,7 @@ def workoutlog():
     sorted_workouts = sorted(current_user.workoutLog, key=attrgetter('date'))
 
     if request.method == 'POST':
-        print(request.content_type)
+        # print(request.content_type)
 
         workout_data = request.json  # Get the JSON data sent from the frontend
         print(workout_data)
@@ -133,8 +137,15 @@ def workoutlog():
             exercise_name = exercise_data['name']
             sets = exercise_data['sets']
             reps = exercise_data['reps']
+            
+            if (exercise_data['type'] == 'weightTraining'):
+                weight = exercise_data['weight']
+                exercise_type = exercise_data['type']
+                new_exercise = Exercise(name=exercise_name, type=exercise_type, weight=weight, sets=sets, reps=reps)
+            elif (exercise_data['type'] == 'cardio'):
+                exercise_type = exercise_data['type']
+                new_exercise = Exercise(name=exercise_name, type=exercise_type, sets=sets, reps=reps)
 
-            new_exercise = Exercise(name=exercise_name, sets=sets, reps=reps)
             new_workout.exercises.append(new_exercise)
 
         # Add the new workout to the database session and commit changes
@@ -191,4 +202,36 @@ def analytics():
 @login_required
 def profile():
     username = current_user.username
-    return render_template("profile.html", user=current_user, username=username)
+    feet = current_user.user_info.height // 12
+    inches = current_user.user_info.height % 12
+
+    # edit profile
+    if request.method == 'POST':
+        # Access form data using request.form
+        name = request.form['name']
+        age = int(request.form['age'])
+        bio = request.form['bio']
+        gender = request.form['genderOptions']
+
+        # convert string to data
+        feet = int(request.form['feet'])
+        inches = int(request.form['inches'])
+        height = (feet * 12) + inches
+
+        weight_goal = request.form['weightOptions']
+        weekly_goal = int(request.form['weekly-goal'])
+
+        # store it in the database
+        current_user.user_info.name = name
+        current_user.user_info.bio = bio
+        current_user.user_info.age = age
+        current_user.user_info.gender = gender
+        current_user.user_info.height = height
+        current_user.user_info.weightGoal = weight_goal
+        current_user.user_info.weeklyGoal = weekly_goal
+
+
+        db.session.commit()
+
+
+    return render_template("profile.html", user=current_user, username=username, feet=feet, inches=inches)
