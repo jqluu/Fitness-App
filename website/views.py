@@ -53,8 +53,10 @@ def home():
     maintCals = calcMaintCals(current_user)
     # rec protein intake
     recProtein = calcProtein(current_user)
+    # days active
+    daysActive = Weight.query.filter_by(user_id=current_user.id).count()
 
-    return render_template("home.html", user=current_user, graph_data=weight_plot_image, sorted_workouts=sorted_workouts, workout_count=workout_count, count_goal=count_goal, weight_changes=weight_changes, maintCals=maintCals, recProtein=recProtein)
+    return render_template("home.html", user=current_user, graph_data=weight_plot_image, sorted_workouts=sorted_workouts, workout_count=workout_count, count_goal=count_goal, weight_changes=weight_changes, maintCals=maintCals, recProtein=recProtein, daysActive=daysActive)
     
 
 # weight tracker

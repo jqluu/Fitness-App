@@ -1,5 +1,11 @@
 // javascript functions
 
+// weightTracker scroll from bottom
+document.addEventListener("DOMContentLoaded", function() {
+  const weightTracker = document.getElementById("weightTracker");
+  weightTracker.scrollTop = weightTracker.scrollHeight;
+});
+
 // confirm delete weight
 function confirmDeleteWeight(weightId) {
   var confirmed = window.confirm('Are you sure you want to delete this weight?');
@@ -116,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
       exerciseRow.innerHTML = `
       <div class="exerciseFields">
           <input type="text" name="exercise_${exerciseId}_name" placeholder="Enter exercise name (cardio)" required>
-          <input type="number" name="exercise_${exerciseId}_sets" placeholder="Enter number of sets or laps" required>
+          <input type="number" name="exercise_${exerciseId}_sets" placeholder="Enter number of sets" required>
           <input type="number" name="exercise_${exerciseId}_reps" placeholder="Enter duration(mins)" required>
           <button type="button" class="removeButton">X</button>
       </div>

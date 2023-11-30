@@ -75,8 +75,16 @@
 }
 
 .weightgraph-container img {
+  border: 1px solid #000;
   max-width: 100%; /* Adjust the maximum width to fit the container */
   height: auto; /* Maintain aspect ratio */
+}
+
+.centered-form {
+  /* Additional styling for the form */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .dashboard-container img {
@@ -117,8 +125,7 @@
 
   .weightgraph-container {
     position: relative;
-    color:#00bfff;
-    width: calc(33.33% - 10px); /* Adjust the width and any spacing as needed */
+    color:#000000;
     margin: 5px; /* Add spacing between the divs */
     background-color: #3e4447; /* Background color for the divs */
     padding: 15px;

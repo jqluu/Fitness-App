@@ -112,12 +112,13 @@
   <div class="profile-container">
       <section class="profile-info">
         <!-- profile picture -->
+        <br>
         <img 
         src="user_avatar.jpg" 
         alt="User Avatar"
         onerror="this.onerror=null; this.src='{{ url_for('static', filename='img/defaultpic.jpg') }}';"
         >
-        <br><br>
+        <br><br><br><br>
 
         <!-- user info -->
         <h2>{{ current_user.user_info.name }}, {{ current_user.user_info.age }}</h2>

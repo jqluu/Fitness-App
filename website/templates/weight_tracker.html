@@ -15,35 +15,39 @@
   <!-- graph -->
   <div class="weightpage-container">
     <div class="weightgraph-container">
-      <h2>Weight</h2>
       <img src="{{ graph_data }}" alt="Graph">
     </div>
 
     <!-- tracker -->
-    <div class="weight-tracker">
-      <ul class="list-group list-group-flush center-list" id="weights">
-        {% for weight in sortedByDate %}
-        <li class="list-group-item weight-item">
-          <strong>{{ weight.data }}</strong>, {{ weight.date.strftime("%Y-%m-%d") }}
-          <button type="button" class="close" onClick="confirmDeleteWeight({{ weight.id }})">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </li>
-        {% endfor %}
-      </ul>
 
-      <br>
-      <form method="POST">
-        <label for="weight">Enter Weight:</label>
-        <input type="text" name="weight" id="weight" class="form-control weight-item" pattern="[0-9]+(\.[0-9]+)?" required>
-        
-        <label for="selected-date">Select a past date(optional):</label>
-        <input type="date" name="selected-date" id="selected-date" class="form-control date-item">
-
-        <br />
-        <button type="submit" class="btn btn-custom">Add weight</button>
-      </form>
+    <div class="weightgraph-container">
+      <div class="weight-tracker" id="weightTracker">
+        Weight Tracker
+        <ul class="list-group list-group-flush center-list" id="weights">
+          {% for weight in sortedByDate %}
+          <li class="list-group-item weight-item">
+            <strong>{{ weight.data }}</strong>, {{ weight.date.strftime("%Y-%m-%d") }}
+            <button type="button" class="close" onClick="confirmDeleteWeight({{ weight.id }})">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </li>
+          {% endfor %}
+        </ul>
+  
+        <br>
+        <form method="POST" class="centered-form">
+          <label for="weight">Enter Weight:</label>
+          <input type="text" name="weight" id="weight" class="form-control weight-item" pattern="[0-9]+(\.[0-9]+)?" required>
+          
+          <label for="selected-date">Select a past date(optional):</label>
+          <input type="date" name="selected-date" id="selected-date" class="form-control date-item">
+  
+          <br />
+          <button type="submit" class="btn btn-custom">Add weight</button>
+        </form>
+      </div>
     </div>
+    
 
   </div>
 

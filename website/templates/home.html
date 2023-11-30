@@ -20,7 +20,7 @@
         <button class="expand-button" onclick="redirectToWeightTracker()">
             <i class="fas fa-external-link-alt"></i>
         </button>
-        <h2>Weight summary:</h2>
+        <h2>Weight summary</h2>
         <img src="{{ graph_data }}" alt="Graph">
     </div>
 
@@ -29,7 +29,7 @@
         <button class="expand-button" onclick="redirectToWorkoutLog()">
             <i class="fas fa-external-link-alt"></i>
         </button>
-        <h2>Recent Workouts:</h2>
+        <h2>Recent Workouts</h2>
         <br>
 
         <ul class="workout-list">
@@ -51,7 +51,7 @@
         <button class="expand-button" onclick="redirectToAnalytics()">
             <i class="fas fa-external-link-alt"></i>
         </button>
-        <h2>Quickstats:</h2>
+        <h2>Quickstats</h2>
         <br><br>
         <div class="quickstats">
             <!-- weekly workout count / goal -->
@@ -85,10 +85,23 @@
 
     <!-- daily check-in -->
     <div class="dashboard-container">  
-        <button class="expand-button" onclick="redirectToWorkoutLog()">
-            <i class="fas fa-external-link-alt"></i>
+        <h2>Daily Check-in</h2>
+
+        <button class="btn btn-custom" onclick="redirectToWeightTracker()"> 
+            Check-in
         </button>
-        <h2>Daily Check-in:</h2>
+
+        <br>
+        <br>
+        <div class="quickstats">
+            <!-- weekly workout count / goal -->
+            Days active: 
+
+            <span class="colored-text">
+                {{ daysActive }} <i class="fa-solid fa-bolt"></i>
+            </span>
+
+        </div>
     </div>
 
     <!-- goals / tips -->
