@@ -52,7 +52,7 @@ def sign_up():
             new_user = User(email=email, username=username, password=generate_password_hash(password, method='sha256'))
 
             # default user info
-            default_user_info = UserInfo(name='John Doe', bio='Please set up your profile', age=25, gender='Male', height=3, weightGoal='Maintain', weeklyGoal = 3)
+            default_user_info = UserInfo(name='John Doe', bio='Please set up your profile', age=25, gender='Male', height=67, weightGoal='Maintain', weeklyGoal = 3)
 
             new_user.user_info = default_user_info
 

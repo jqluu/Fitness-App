@@ -31,6 +31,15 @@
             &nbsp; 
             
             <b>{{ workout.name }}</b>
+
+            <button class="favorite-button" onclick="toggleFavorite({{ workout.id }})">
+              {% if workout.isFavorited %}
+                <i class="fa-solid fa-star"></i>
+              {% else %}
+                <i class="fa-regular fa-star"></i>
+              {% endif %}
+            </button>
+
             <button class="delete-button" onclick="confirmDeleteWorkout({{ workout.id }})">&times;</button>
           </caption>
             <thead>

@@ -27,6 +27,11 @@
     color: white;
   }
 
+  .navbar-nav .nav-item.nav-link:hover {
+    background-color: #343a40 !important; /* Change to your desired highlight color */
+    color: #ffffff !important; /* Change to the text color you prefer */
+  }
+
   .header-container {
     max-width: 400px; /* Adjust the maximum width as needed */
     margin: 0 auto; /* Centers the container */
@@ -358,8 +363,14 @@
 
 .workout-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Three tables per row */
+  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr)); /* Three tables per row */
   gap: 10px; /* Adjust the gap between tables as needed */
+}
+
+.table-container {
+  position: relative; /* Set the parent container as relative */
+  display: inline-block; /* Ensures that the container doesn't take full width */
+  margin-bottom: 20px; /* Adds spacing between tables if needed */
 }
 
 /* Style for table body */
@@ -426,6 +437,17 @@
   transition: all 0.3s ease;
 }
 
+.favorite-button {
+  background-color: transparent;
+  border: none;
+  color: rgb(237, 229, 66);
+  cursor: pointer;
+  font-size: 18px;
+  position: absolute;
+  top: 30px; /* Adjust top position as needed */
+  right: 34px; /* Adjust right position as needed */
+}
+
 .delete-button {
   background-color: transparent;
   border: none;
@@ -438,8 +460,3 @@
 }
 
 
-.table-container {
-  position: relative; /* Set the parent container as relative */
-  display: inline-block; /* Ensures that the container doesn't take full width */
-  margin-bottom: 20px; /* Adds spacing between tables if needed */
-}

@@ -49,6 +49,16 @@ function deleteWorkout(workoutId) {
   });
 }
 
+// weight_tracker delete weight
+function toggleFavorite(workoutId) {
+  fetch("/toggle-favorite", {
+    method: "POST",
+    body: JSON.stringify({ workoutId: workoutId }),
+  }).then((_res) => {
+    window.location.href = "/workoutlog";
+  });
+}
+
 function redirectToWeightTracker() {
   // Redirect to the specified URL
   window.location.href = "/weighttracker";
@@ -197,7 +207,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 });
-
-
 
 

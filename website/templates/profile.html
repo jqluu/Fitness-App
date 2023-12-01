@@ -23,87 +23,92 @@
     <div class="modal-content">
       <span class="close" id="closeModalButton">&times;</span>
 
-      <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
 
-        <p><b>Profile info:</b></p>
+          <p><b>Profile info(displayed):</b></p>
 
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name" class="form-control name-item" pattern="[A-Za-z0-9 ]+" required
-        value="{{ current_user.user_info.name }}">
-        <br>
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" class="form-control name-item" pattern="[A-Za-z0-9 ]+" required
+          value="{{ current_user.user_info.name }}">
+          <br>
 
-        <label for="bio">Bio</label>
-        <textarea name="bio" id="bio" class="form-control" rows="4" cols="50">{{ current_user.user_info.bio }}</textarea>
-        <br>
+          <label for="bio">Bio</label>
+          <textarea name="bio" id="bio" class="form-control" rows="4" cols="50">{{ current_user.user_info.bio }}</textarea>
+          <br>
 
-        <p><b>Personal info:</b></p>
+          <label for="profile_pic">Upload a profile picture</label>
+          <br>
+          <input type="file" name="profile_pic" accept="image/*">
+          <br><br><br>
 
-        <label for="age">Age</label>
-        <br>
-        
-        <input type="number" id="age" name="age" min="1" max="130" required
-        value="{{ current_user.user_info.age }}">
-        <br>
-        <br>
+          <p><b>Personal info(private):</b></p>
 
-        <label for="gender">Gender</label>
-        <br>
+          <label for="age">Age</label>
+          <br>
+          
+          <input type="number" id="age" name="age" min="1" max="130" required
+          value="{{ current_user.user_info.age }}">
+          <br>
+          <br>
 
-        <label for="option1">
-          <input type="radio" id="option1" name="genderOptions" value="Male" required>
-          Male
-        </label><br>
-  
-        <label for="option2">
-          <input type="radio" id="option2" name="genderOptions" value="Female">
-          Female
-        </label><br>
-        <br>
+          <label for="gender">Gender</label>
+          <br>
 
-        <label for="height">Height</label>
-        <br>
-        
-        <label for="feet">Feet:</label>
-        <input type="number" id="feet" name="feet" min="0" max="8" required
-        value="{{ feet }}">
-        <br>
+          <label for="option1">
+            <input type="radio" id="option1" name="genderOptions" value="Male" required>
+            Male
+          </label><br>
+    
+          <label for="option2">
+            <input type="radio" id="option2" name="genderOptions" value="Female">
+            Female
+          </label><br>
+          <br>
 
-        <label for="inches">Inches:</label>
-        <input type="number" id="inches" name="inches" min="0" max="11" required
-        value="{{ inches }}">
-        <br>
-        <br>        
+          <label for="height">Height</label>
+          <br>
+          
+          <label for="feet">Feet:</label>
+          <input type="number" id="feet" name="feet" min="0" max="8" required
+          value="{{ feet }}">
+          <br>
 
-        <label for="goals">Regarding weight goals, you want to: </label>
-        <br>
+          <label for="inches">Inches:</label>
+          <input type="number" id="inches" name="inches" min="0" max="11" required
+          value="{{ inches }}">
+          <br>
+          <br>        
 
-        <label for="option1">
-          <input type="radio" id="option1" name="weightOptions" value="Gain" required>
-          Gain
-        </label><br>
-  
-        <label for="option2">
-          <input type="radio" id="option2" name="weightOptions" value="Maintain">
-          Maintain
-        </label><br>
-  
-        <label for="option3">
-          <input type="radio" id="option3" name="weightOptions" value="Lose">
-          Lose
-        </label>
-        <br>
-        <br>
+          <label for="goals">Regarding weight goals, you want to: </label>
+          <br>
 
-        <label for="weekly-goal">How many days a week do you want to workout?</label>
-        <input type="number" id="weekly-goal" name="weekly-goal" min="0" max="7" required
-        value="{{ current_user.user_info.weeklyGoal }}">
-        <br>
+          <label for="option1">
+            <input type="radio" id="option1" name="weightOptions" value="Gain" required>
+            Gain
+          </label><br>
+    
+          <label for="option2">
+            <input type="radio" id="option2" name="weightOptions" value="Maintain">
+            Maintain
+          </label><br>
+    
+          <label for="option3">
+            <input type="radio" id="option3" name="weightOptions" value="Lose">
+            Lose
+          </label>
+          <br>
+          <br>
+
+          <label for="weekly-goal">How many days a week do you want to workout?</label>
+          <input type="number" id="weekly-goal" name="weekly-goal" min="0" max="7" required
+          value="{{ current_user.user_info.weeklyGoal }}">
+          <br>
 
 
-        <div class="centered-content">
-          <button type="submit" class="btn btn-custom">Confirm</button>
-        </div>
-      </form>
+          <div class="centered-content">
+            <button type="submit" class="btn btn-custom">Confirm</button>
+          </div>
+        </form>
     </div>
    </div>
 
@@ -114,11 +119,11 @@
         <!-- profile picture -->
         <br>
         <img 
-        src="user_avatar.jpg" 
+        src="{{ url_for('static', filename='img/user_avatar.jpg') }}"
         alt="User Avatar"
         onerror="this.onerror=null; this.src='{{ url_for('static', filename='img/defaultpic.jpg') }}';"
         >
-        <br><br><br><br>
+        <br><br>
 
         <!-- user info -->
         <h2>{{ current_user.user_info.name }}, {{ current_user.user_info.age }}</h2>
@@ -132,17 +137,68 @@
         <!-- Additional details about the user -->
       </section>
   </div>
+  <br><br>
 
+  <div class="workout-log-page">
+  <h2>Favorite workouts:</h2>
+
+  <div class="workout-wrapper">
+    {% for workout in sorted_workouts %}
+    <div class="table-container">
+      
+
+      {% if workout.isFavorited %}
+      <table id="exerciseTable" class="custom-table">
+        <caption class="table-caption">     
+          <b>{{ workout.name }}</b>
+        </caption>
+
+        <thead>
+          <tr>
+            <th>Exercise</th>
+            <th>Weight</th>
+            <th>Sets</th>
+            <th>Reps</th>
+            <th>Duration</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="exerciseTableBody">
+        {% for exercise in workout.exercises %}
+          <tr>
+              <td>{{ exercise.name }}</td>
+              
+                {% if exercise.type == 'weightTraining' %}
+                  <td>{{ exercise.weight }} lbs</td>     
+                  <td>{{ exercise.sets }}</td>
+                  <td>{{ exercise.reps }}</td>
+                  <td></td>
+                {% endif %}
+
+              
+                {% if exercise.type == 'cardio' %}
+                  <td></td>
+                  <td>{{ exercise.sets }}</td>
+                  <td></td>
+                  <td>{{ exercise.reps }} mins</td>
+                {% endif %}
+              
+          </tr>
+        {% endfor %}
+        </tbody>
+
+        
+      </table>
+      {% endif %}
+
+    </div>
+    {% endfor %}
+    
+  </div>
+</div>
+  
 
 
 </body>
 {% endblock %}
-
-
- <!-- Other profile content goes here -->
-
-  <!-- stats -->
-
-
-  <!-- container 1 row, 3 col, can be expanded
-  for featured workouts -->

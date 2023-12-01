@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, request, flash, jsonify, Response, url_for, redirect
 from flask_login import login_required, current_user
 import json
+import os
 
 # models
 from .models import Weight, Workout, Exercise, workout_exercise
@@ -29,6 +30,15 @@ def generate_weight_plot_data():
     data = [(weight.date, float(weight.data)) for weight in sortedByDate]
     return data
 
+# Get the current directory
+current_directory = os.path.dirname(__file__)
+
+# Define the path to the static/img directory
+img_directory = os.path.join(current_directory, 'static', 'img')
+
+# Save the uploaded file to the img directory
+file_path = os.path.join(img_directory, 'user_avatar.jpg')
+
 views = Blueprint('views', __name__)
 
 # home / dash
@@ -47,12 +57,22 @@ def home():
     # quickstats
     workout_count = weeklyWorkoutCount(current_user)
     count_goal = current_user.user_info.weeklyGoal
+
+    # weight dependant
+    if (Weight.query.filter_by(user_id=current_user.id).order_by(Weight.date.desc()).first()):
     # weight change
-    weight_changes = weightChange(current_user)
-    # maintenance calories
-    maintCals = calcMaintCals(current_user)
-    # rec protein intake
-    recProtein = calcProtein(current_user)
+        weight_changes = weightChange(current_user)
+        # maintenance calories
+        maintCals = calcMaintCals(current_user)
+        # rec protein intake
+        recProtein = calcProtein(current_user)
+    else:
+        weight_changes = 0
+        # maintenance calories
+        maintCals = 0
+        # rec protein intake
+        recProtein = 0
+
     # days active
     daysActive = Weight.query.filter_by(user_id=current_user.id).count()
 
@@ -171,6 +191,20 @@ def delete_workout():
 
     return jsonify({})
 
+@views.route('/toggle-favorite', methods=['POST'])
+def toggle_favorite():  
+    workout = json.loads(request.data) 
+    workoutId = workout['workoutId']
+    workout = Workout.query.get(workoutId)
+
+    if workout:
+        if workout.user_id == current_user.id:
+            print("favorited")
+            workout.isFavorited = not workout.isFavorited
+            db.session.commit()
+
+    return jsonify({})
+
 
 # analytics
 @views.route('/analytics', methods=['GET', 'POST'])
@@ -206,9 +240,21 @@ def profile():
     username = current_user.username
     feet = current_user.user_info.height // 12
     inches = current_user.user_info.height % 12
+    sorted_workouts = sorted(current_user.workoutLog, key=attrgetter('date'))
 
     # edit profile
     if request.method == 'POST':
+        # profile pic
+        if 'profile_pic' in request.files:
+            file = request.files['profile_pic']
+            if file.filename != '':
+                print("File received:", file.filename)  # Check if file is received
+                try:
+                    file.save(file_path)
+                    print("File saved successfully")  # Check if file is saved
+                except Exception as e:
+                    print("Error saving file:", e)
+
         # Access form data using request.form
         name = request.form['name']
         age = int(request.form['age'])
@@ -236,4 +282,4 @@ def profile():
         db.session.commit()
 
 
-    return render_template("profile.html", user=current_user, username=username, feet=feet, inches=inches)
+    return render_template("profile.html", user=current_user, username=username, feet=feet, inches=inches, sorted_workouts=sorted_workouts)

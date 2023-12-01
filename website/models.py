@@ -50,7 +50,9 @@ class Workout(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     date = db.Column(Date)
+    isFavorited = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
 
     # exercise many to many relation
     exercises = db.relationship(
