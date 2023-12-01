@@ -26,16 +26,61 @@
 <body>
     <div class="analytics-container">
 
-        <div class="graph-analytics">
-            <h2>Weight</h2>
-            <img src="{{ graph_data }}" alt="Graph">
-        </div>
-
-
-
         <div class="calendar-analytics">
             <div id='calendar'></div>
         </div>
+
+        
+
+        <div class="dashboard-container-analytics">  
+            <h2>Nutrition guide:</h2>
+            <br>
+            <div class="quickstats">
+                <!-- weekly workout count / goal -->
+                According to your weight goal of: 
+                <span class="colored-text">
+                    {{ user.user_info.weightGoal }}
+                </span>,
+                <br>
+                you should look to intake a daily amount calories 
+                
+    
+                {% if user.user_info.weightGoal == 'Lose' %}
+                    <span class="colored-text">
+                        <br> lower than: ~{{ maintCals }}
+                    </span>
+                {% elif user.user_info.weightGoal == 'Maintain' %}
+                    <span class="colored-text">
+                        <br> around: ~{{ maintCals }}
+                    </span>
+                {% elif user.user_info.weightGoal == 'Gain' %}
+                    <span class="colored-text">
+                        <br> above: ~{{ maintCals }}
+                    </span>
+                {% endif %}
+
+
+                <br><br>
+                at 
+                <span class="colored-text">
+                    {{ current_weight }} lbs
+                </span> 
+                you should consume an estimated 
+                <br> .7g of protein per lb:
+                <span class="colored-text">
+                    {{ recProtein }} g
+                </span>
+
+            </div>
+
+            <br><br>
+            <div class="quickstats">
+                <img src="{{ graph_data }}" alt="Graph">
+            </div>
+            
+            
+        </div>
+
         
 
     </div>
@@ -44,3 +89,16 @@
 
 
 {% endblock %}
+
+<!--according to your caloric maintenance
+    and your weight goal of: {weightGoal}
+
+    you should look to intake a daily amount calories
+    above lower around:
+    {maintCals}
+
+    at {weight}
+    you should consume an estimated .7g of protein per lb
+    {recProtein}
+
+    -->

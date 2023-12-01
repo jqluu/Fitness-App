@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     weightLog = db.relationship('Weight', backref='user', lazy='dynamic')
     workoutLog = db.relationship('Workout')
     user_info = db.relationship('UserInfo', backref='user', uselist=False)
+    # nutritionLog = db.relationship('Weight', backref='user', lazy='dynamic')
 
 class UserInfo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -36,6 +37,12 @@ class Weight(db.Model):
     date = db.Column(Date)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+
+# class FoodItem(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     data = db.Column(db.String(10))
+#     date = db.Column(Date)
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 # workout/exercise

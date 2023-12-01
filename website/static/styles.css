@@ -155,7 +155,7 @@
     
     position: relative;
     color:#00bfff;
-    width: calc(32% - 10px); /* Adjust the width and any spacing as needed */
+    width: calc(25% - 10px); /* Adjust the width and any spacing as needed */
     margin: 5px; /* Add spacing between the divs */
     background-color: #3e4447; /* Background color for the divs */
     padding: 15px;
@@ -169,7 +169,7 @@
     
     position: relative;
     color:#00bfff;
-    width: calc(29% - 10px); /* Adjust the width and any spacing as needed */
+    width: calc(30% - 10px); /* Adjust the width and any spacing as needed */
     margin: 5px; /* Add spacing between the divs */
     background-color: #3e4447; /* Background color for the divs */
     padding: 15px;
@@ -179,15 +179,32 @@
       
   }
 
+  .dashboard-container-analytics {
+    position: relative;
+    color: #00bfff;
+    width: calc(30% - 20px); /* Adjust the width and any spacing as needed */
+    margin: 10px; /* Adjust the spacing between the divs */
+    background-color: rgba(62, 68, 71, 0.5);
+    padding: 15px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
   .weight-graph-home img {
     max-width: 100%; /* Ensure the image doesn't exceed the container's width */
     max-height: 100%; /* Ensure the image doesn't exceed the container's height */
   }
 
   .graph-analytics img {
-    max-width: 100%; /* Ensure the image doesn't exceed the container's width */
-    max-height: 100%; /* Ensure the image doesn't exceed the container's height */
+     /* Adjust image sizing properties as needed */
+  width: 100%; /* Set the image to fill its container */
+  height: auto; /* Maintain the image's aspect ratio */
+  max-width: 100%; /* Ensure the image doesn't exceed the container width */
+  display: block; /* Ensure proper rendering as a block-level element */
   }
+  
 
   .analytics-container{
     display: flex; /* Use flexbox for layout */
@@ -363,7 +380,7 @@
 
 .workout-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(25%, 1fr)); /* Three tables per row */
+  grid-template-columns: repeat(auto-fill, minmax(28%, 1fr)); /* Three tables per row */
   gap: 10px; /* Adjust the gap between tables as needed */
 }
 

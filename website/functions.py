@@ -124,3 +124,9 @@ def calcProtein(user):
     weight_data = int(weight.data)
 
     return round(0.7 * weight_data)
+
+def getCurrWeight(user):
+
+    weight = Weight.query.filter_by(user_id=user.id).order_by(Weight.date.desc()).first()
+
+    return int(weight.data)

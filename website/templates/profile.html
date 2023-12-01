@@ -144,10 +144,10 @@
 
   <div class="workout-wrapper">
     {% for workout in sorted_workouts %}
-    <div class="table-container">
-      
 
+    <!-- if favorited, created table -->
       {% if workout.isFavorited %}
+      <div class="table-container">
       <table id="exerciseTable" class="custom-table">
         <caption class="table-caption">     
           <b>{{ workout.name }}</b>
@@ -190,6 +190,7 @@
 
         
       </table>
+      </div>
       {% endif %}
 
     </div>

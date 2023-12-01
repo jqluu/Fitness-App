@@ -15,7 +15,7 @@ import io
 import base64
 import pandas as pd
 
-from website.functions import update_weight_plot, weeklyWorkoutCount, weightChange, calcMaintCals, calcProtein
+from website.functions import update_weight_plot, weeklyWorkoutCount, weightChange, calcMaintCals, calcProtein, getCurrWeight
 
 # db
 from . import db
@@ -216,6 +216,24 @@ def analytics():
     #debug
     #print("graph_data:", graph_data)
 
+    # weight dependant
+    if (Weight.query.filter_by(user_id=current_user.id).order_by(Weight.date.desc()).first()):
+        # weight change
+        weight_changes = weightChange(current_user)
+        #
+        current_weight = getCurrWeight(current_user)
+        # maintenance calories
+        maintCals = calcMaintCals(current_user)
+        # rec protein intake
+        recProtein = calcProtein(current_user)
+    else:
+        weight_changes = 0
+        # maintenance calories
+        maintCals = 0
+        # rec protein intake
+        recProtein = 0
+
+
     # calendar events
     workouts = Workout.query.all()
 
@@ -230,7 +248,7 @@ def analytics():
 
 
 
-    return render_template("analytics.html", user=current_user, graph_data=weight_plot_image, events=events)
+    return render_template("analytics.html", user=current_user, graph_data=weight_plot_image, events=events, maintCals=maintCals, recProtein=recProtein, weight_changes=weight_changes, current_weight=current_weight)
 
 
 # profile
