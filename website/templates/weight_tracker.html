@@ -22,7 +22,7 @@
 
     <div class="weightgraph-container">
       <div class="weight-tracker" id="weightTracker">
-        Weight Tracker
+        
         <ul class="list-group list-group-flush center-list" id="weights">
           {% for weight in sortedByDate %}
           <li class="list-group-item weight-item">
@@ -36,6 +36,7 @@
   
         <br>
         <form method="POST" class="centered-form">
+          <input type="hidden" name="form_name" value="weightTrackerForm">
           <label for="weight">Enter Weight:</label>
           <input type="text" name="weight" id="weight" class="form-control weight-item" pattern="[0-9]+(\.[0-9]+)?" required>
           
@@ -50,28 +51,29 @@
 
     <div class="weightgraph-container">
       <div class="weight-tracker" id="weightTracker">
-        Weight Tracker
-        <ul class="list-group list-group-flush center-list" id="weights">
-          {% for weight in sortedByDate %}
-          <li class="list-group-item weight-item">
-            <strong>{{ weight.data }}</strong>, {{ weight.date.strftime("%Y-%m-%d") }}
-            <button type="button" class="close" onClick="confirmDeleteWeight({{ weight.id }})">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </li>
-          {% endfor %}
-        </ul>
-  
+        <b>Calorie Log</b>
         <br>
-        <form method="POST" class="centered-form">
-          <label for="weight">Enter Weight:</label>
-          <input type="text" name="weight" id="weight" class="form-control weight-item" pattern="[0-9]+(\.[0-9]+)?" required>
-          
-          <label for="selected-date">Select a past date(optional):</label>
-          <input type="date" name="selected-date" id="selected-date" class="form-control date-item">
+        Remaining calories: {{ remainingCals }}
+        <br>
+        Remaining protein: {{ remainingProtein }}g
   
-          <br />
-          <button type="submit" class="btn btn-custom">Add weight</button>
+        <br><br><br>
+        <form method="POST" class="centered-form">
+          <input type="hidden" name="form_name" value="calorieLogForm">
+          <label for="calories">Enter calories:</label>
+          <input type="text" name="calories" id="calories" class="form-control weight-item" pattern="[0-9]+(\.[0-9]+)?" required>
+
+          <label for="protein">Enter protein:</label>
+          <input type="text" name="protein" id="protein" class="form-control weight-item" pattern="[0-9]+(\.[0-9]+)?" required>
+
+          <label for="carbs">Enter carbs:</label>
+          <input type="text" name="carbs" id="carbs" class="form-control weight-item" pattern="[0-9]+(\.[0-9]+)?" required>
+
+          <label for="fats">Enter fats:</label>
+          <input type="text" name="fats" id="fats" class="form-control weight-item" pattern="[0-9]+(\.[0-9]+)?" required>
+  
+          <br /><br>
+          <button type="submit" class="btn btn-custom">Add food</button>
         </form>
       </div>
     </div>

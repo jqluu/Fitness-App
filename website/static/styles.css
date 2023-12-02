@@ -3,7 +3,8 @@
   max-width: 300px;
   border: 2px solid #000000;
   background-color: rgb(255, 255, 255);
-  max-height: 530px; /* Adjust the value as needed */
+  max-height: 550px; /* Adjust the value as needed */
+  min-height: 550px;
   overflow-y: auto;
 }
 
@@ -388,6 +389,12 @@
   position: relative; /* Set the parent container as relative */
   display: inline-block; /* Ensures that the container doesn't take full width */
   margin-bottom: 20px; /* Adds spacing between tables if needed */
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns */
+  gap: 20px; /* Adjust the gap between table containers */
 }
 
 /* Style for table body */

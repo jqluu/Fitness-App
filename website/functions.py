@@ -7,10 +7,10 @@ import base64
 import pandas as pd
 
 # date 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 # models
-from .models import Weight, Workout, Exercise, workout_exercise, User, UserInfo
+from .models import Weight, Workout, Exercise, workout_exercise, User, UserInfo, FoodItem
 
 # weight avg
 from collections import defaultdict
@@ -115,7 +115,7 @@ def calcMaintCals(user):
         maintCals = 655 + (4.35 * weight_data) + (4.7 * user.user_info.height) - (4.7 * user.user_info.age)
 
 
-    return round(maintCals)
+    return round(maintCals*1.2)
 
 
 def calcProtein(user):
@@ -130,3 +130,28 @@ def getCurrWeight(user):
     weight = Weight.query.filter_by(user_id=user.id).order_by(Weight.date.desc()).first()
 
     return int(weight.data)
+
+
+def calcRemainingCals(user, maintCals):
+
+    food_items_today = FoodItem.query.filter_by(user_id=user.id, date=date.today()).all()
+    remainingCals = maintCals
+
+    for food_item in food_items_today:
+        remainingCals -= int(food_item.calories)
+    
+
+    return remainingCals
+
+
+def calcRemainingProtein(user, recProtein):
+
+    food_items_today = FoodItem.query.filter_by(user_id=user.id, date=date.today()).all()
+    remainingProtein = recProtein
+
+    for food_item in food_items_today:
+        remainingProtein -= int(food_item.protein)
+    
+
+    return remainingProtein
+    

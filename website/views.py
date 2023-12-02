@@ -5,7 +5,7 @@ import json
 import os
 
 # models
-from .models import Weight, Workout, Exercise, workout_exercise
+from .models import Weight, Workout, Exercise, workout_exercise, FoodItem
 
 # plot
 import matplotlib
@@ -15,7 +15,7 @@ import io
 import base64
 import pandas as pd
 
-from website.functions import update_weight_plot, weeklyWorkoutCount, weightChange, calcMaintCals, calcProtein, getCurrWeight
+from website.functions import update_weight_plot, weeklyWorkoutCount, weightChange, calcMaintCals, calcProtein, getCurrWeight, calcRemainingCals, calcRemainingProtein
 
 # db
 from . import db
@@ -58,6 +58,8 @@ def home():
     workout_count = weeklyWorkoutCount(current_user)
     count_goal = current_user.user_info.weeklyGoal
 
+
+
     # weight dependant
     if (Weight.query.filter_by(user_id=current_user.id).order_by(Weight.date.desc()).first()):
     # weight change
@@ -66,17 +68,22 @@ def home():
         maintCals = calcMaintCals(current_user)
         # rec protein intake
         recProtein = calcProtein(current_user)
+        # remaining calories
+        remainingCals = calcRemainingCals(current_user, maintCals)
+        # remaining protein
+        remainingProtein = calcRemainingProtein(current_user, recProtein)
     else:
         weight_changes = 0
-        # maintenance calories
+        # default
         maintCals = 0
-        # rec protein intake
         recProtein = 0
+        remainingCals = 0
+        remainingProtein = 0
 
     # days active
     daysActive = Weight.query.filter_by(user_id=current_user.id).count()
 
-    return render_template("home.html", user=current_user, graph_data=weight_plot_image, sorted_workouts=sorted_workouts, workout_count=workout_count, count_goal=count_goal, weight_changes=weight_changes, maintCals=maintCals, recProtein=recProtein, daysActive=daysActive)
+    return render_template("home.html", user=current_user, graph_data=weight_plot_image, sorted_workouts=sorted_workouts, workout_count=workout_count, count_goal=count_goal, weight_changes=weight_changes, maintCals=maintCals, recProtein=recProtein, daysActive=daysActive, remainingProtein=remainingProtein, remainingCals=remainingCals)
     
 
 # weight tracker
@@ -84,6 +91,23 @@ def home():
 @login_required
 def weighttracker():
 
+    if (Weight.query.filter_by(user_id=current_user.id).order_by(Weight.date.desc()).first()):
+        # maintenance calories
+        maintCals = calcMaintCals(current_user)
+        # rec protein intake
+        recProtein = calcProtein(current_user)
+        # remaining calories
+        remainingCals = calcRemainingCals(current_user, maintCals)
+        # remaining protein
+        remainingProtein = calcRemainingProtein(current_user, recProtein)
+
+    else:
+        # default
+        maintCals = 0
+        recProtein = 0
+        remainingCals = 0
+        remainingProtein = 0
+        
     # plot
     weight_data = generate_weight_plot_data()
     weight_plot_image = update_weight_plot(weight_data)
@@ -93,22 +117,39 @@ def weighttracker():
 
     # adding a new date to db
     if request.method == 'POST':
-        weight = request.form.get('weight')
-        selected_date = request.form.get('selected-date')
+        form_name = request.form.get('form_name')
+        print("form name= " + form_name)
+        print(request.form)
+        if form_name == 'weightTrackerForm':
+            weight = request.form.get('weight')
+            selected_date = request.form.get('selected-date')
 
-        if (selected_date):
-            selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
-        else:
+            if (selected_date):
+                selected_date = datetime.strptime(selected_date, "%Y-%m-%d").date()
+            else:
+                selected_date = date.today()
+
+            new_weight = Weight(data=weight, date=selected_date, user_id=current_user.id)
+            db.session.add(new_weight)
+
+        elif form_name == 'calorieLogForm':
+            calorie_data = int(request.form['calories'])
+            protein_data = int(request.form['protein'])
+            carbs_data = int(request.form['carbs'])
+            fats_data = int(request.form['fats'])
             selected_date = date.today()
 
-        new_weight = Weight(data=weight, date=selected_date, user_id=current_user.id)
-        db.session.add(new_weight)
+            new_foodItem = FoodItem(calories=calorie_data, protein=protein_data, carbs=carbs_data, fats=fats_data, date=selected_date, user_id=current_user.id)
+            
+            db.session.add(new_foodItem)
+
         db.session.commit()
-        flash('Weight added.', category='success')
+        flash('Data added.', category='success')
+
         weight_data = generate_weight_plot_data()
         weight_plot_image = update_weight_plot(weight_data)
 
-    return render_template("weight_tracker.html", user=current_user, sortedByDate=sortedByDate, graph_data=weight_plot_image)
+    return render_template("weight_tracker.html", user=current_user, sortedByDate=sortedByDate, graph_data=weight_plot_image, maintCals=maintCals, recProtein=recProtein, remainingProtein=remainingProtein, remainingCals=remainingCals)
 
 
 # delete weight
