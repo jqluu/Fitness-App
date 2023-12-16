@@ -9,7 +9,7 @@ How to run the code:
 1. Open a terminal at the file location \Fitness-App 
 ![image](https://github.com/jqluu/Fitness-App/assets/72171222/d84fe652-b77e-4aff-b07e-a3bd682dbef4)
 2. run `pip install -r requirements.txt`
-3. run 'pip install Werkzeug==2.3.7'
+3. run `pip install Werkzeug==2.3.7`
 (Werkzeug might cause some issues as flask no longer supports it)
 4.  run the main.py file
 
