@@ -22,11 +22,13 @@ How to run the code:
 ![image](https://github.com/jqluu/Fitness-App/assets/72171222/0f70351d-1140-4c18-a263-f603095a534d)
 
 
-7. Sample data is provided using,
+7. Sample data is provided using, 
 username:`admin@admin.com`
 password:`admin`
 
 (or you can create your own account)
+![image](https://github.com/jqluu/Fitness-App/assets/72171222/9babbcee-87c9-4a02-a682-28fc782ed61a)
+
 
 
 Application Preview:
