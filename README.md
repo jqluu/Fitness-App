@@ -2,6 +2,7 @@
 
 This is a capstone project for CPSC 491
 This application is my take on a beginner friendly fitness tracker.
+This project was developed in python, using flask, sqlite, javascript, html, and css.
 
 How to run the code:
 
@@ -13,7 +14,7 @@ How to run the code:
 
 
 Application Preview:
-![image](https://github.com/jqluu/Fitness-App/assets/72171222/71a45c23-862d-43a8-9970-d75727dca672)
+![image](https://github.com/jqluu/Fitness-App/assets/72171222/d9c385a0-14c3-4d35-b6bd-ce95349096a0)
 ![image](https://github.com/jqluu/Fitness-App/assets/72171222/df1c28d6-5b7b-4c3f-870d-6a91654704ad)
 ![image](https://github.com/jqluu/Fitness-App/assets/72171222/c970d727-b0fd-4639-b299-a619a193f470)
 ![image](https://github.com/jqluu/Fitness-App/assets/72171222/3fea1bde-84e6-4061-a8bc-aca50374a435)
