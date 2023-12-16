@@ -1,4 +1,5 @@
 Gymstats
+
 This is a capstone project for CPSC 491
 This application is my take on a beginner friendly fitness tracker.
 
