@@ -17,6 +17,8 @@ How to run the code:
 
 
 5.  run the main.py file
+
+   
 ![image](https://github.com/jqluu/Fitness-App/assets/72171222/0f70351d-1140-4c18-a263-f603095a534d)
 
 
